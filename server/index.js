@@ -19,6 +19,7 @@ app.post("/users", async (req,res) =>
         [name]
        );
        res.json(newUser.rows[0]);
+       console.log("user created")
     }catch (err){
         console.error(err.message);
     }
@@ -97,8 +98,5 @@ app.get("/connections/:id", async (req,res) =>
         console.log(err.message);
     }
 })
-
-
-
 
 app.listen(3000);
