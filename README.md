@@ -1,5 +1,7 @@
 # Pern-test
 
+This project was made using the PERN stack (Postgresql, Express, React.js, Node.js)
+
 In order to execute this code you'll need to copy the sql script in server/database.sql in a Posrgresql client.
 
 
