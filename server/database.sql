@@ -1,6 +1,6 @@
 CREATE DATABASE pern-prueba;
 
-CREATE TABLE user (id SERIAL PRIMARY KEY,name VARCHAR(255));
+CREATE TABLE usuario (usuario_id SERIAL PRIMARY KEY,name VARCHAR(255));
 
 CREATE TABLE connection
 (
