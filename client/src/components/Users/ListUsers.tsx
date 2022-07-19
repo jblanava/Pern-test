@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 
-
 const ListUsers = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<any>([]);
 
   const getUsers = async () => {
     try {
@@ -10,7 +9,11 @@ const ListUsers = () => {
       const jsonData = await response.json();
       setUsers(jsonData);
     } catch (err) {
-      console.error(err.message);
+      if(err instanceof Error){
+        console.error(err.message);
+    }else{
+        console.error("Unexpected error",err);
+    }
     }
   };
 
@@ -30,13 +33,13 @@ const ListUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(user => (
+          {users.map((user:any) => (
             <tr key={user.usuario_id}>
               <td>{user.usuario_id}</td>
               <td>{user.name}</td>
               <td><button
                 className="btn"
-                onClick={() => window.location = "/connections/" + user.usuario_id}>
+                onClick={() => window.location.href = "/connections/" + user.usuario_id}>
                 {user.name + " connections"}
               </button></td>
             </tr>

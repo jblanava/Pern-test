@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 const InputUser = () => {
   const [name, setName] = useState("");
 
-  const onSubmitForm = async e => {
+  const onSubmitForm = async (e:any) => {
     e.preventDefault();
     try {
       const body = { name };
@@ -12,9 +12,13 @@ const InputUser = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
-      window.location = '/';
+      window.location.href = '/';
     } catch (err) {
-      console.error(err.message);
+      if(err instanceof Error){
+        console.error(err.message);
+    }else{
+        console.error("Unexpected error",err);
+    }
     }
   };
 
