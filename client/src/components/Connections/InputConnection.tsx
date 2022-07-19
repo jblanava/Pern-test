@@ -4,16 +4,20 @@ const InputConnection = () => {
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
 
-  const onSubmitForm = async e => {
+  const onSubmitForm = async (e:any) => {
     e.preventDefault();
     try {
       const response = await fetch("http://localhost:3000/connections" + "/" + user1 + "/" + user2, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
-      window.location = '/connections';
+      window.location.href = '/connections';
     } catch (err) {
-      console.error(err.message);
+      if(err instanceof Error){
+        console.error(err.message);
+    }else{
+        console.error("Unexpected error",err);
+    }
     }
   };
 

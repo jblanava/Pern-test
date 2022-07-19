@@ -1,4 +1,6 @@
-CREATE DATABASE pern-prueba;
+CREATE DATABASE pernprueba;
+
+\c pernprueba;
 
 CREATE TABLE usuario (usuario_id SERIAL PRIMARY KEY,name VARCHAR(255));
 
@@ -13,4 +15,4 @@ CREATE TABLE connection
     ),
     FOREIGN KEY (user1_id) REFERENCES usuario (usuario_id),
     FOREIGN KEY (user2_id) REFERENCES usuario (usuario_id)
-);
+)

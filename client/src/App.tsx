@@ -20,9 +20,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Users />} />
-        <Route exact path="/connections" element={<Connections />} />
-        <Route exact path="/connections/:id" element={<EspecificConnections />} />
+        <Route path="/" element={<Users />} />
+        <Route path="/connections" element={<Connections />} />
+        <Route path="/connections/:id" element={<EspecificConnections />} />
       </Routes>
     </Router>
   );
@@ -33,7 +33,7 @@ const Users = () => {
     <Fragment>
       <h1>Prueba en Typescript feature</h1>
       <div className='container'>
-        <button className="btn btn-primary mt-3" onClick={() => window.location = "/connections"}>
+        <button className="btn btn-primary mt-3" onClick={() => window.location.href = "/connections"}>
           Connections
         </button>
         <InputUser />
@@ -47,7 +47,7 @@ const Connections = () => {
   return (
     <Fragment>
       <div className='container'>
-        <button className="btn btn-primary mt-3" onClick={() => window.location = "/"}>
+        <button className="btn btn-primary mt-3" onClick={() => window.location.href = "/"}>
           Users
         </button>
         <InputConnection />
@@ -61,7 +61,7 @@ const EspecificConnections = () => {
   return (
     <Fragment>
       <div className='container'>
-        <button className="btn btn-primary mt-3" onClick={() => window.location = "/"}>
+        <button className="btn btn-primary mt-3" onClick={() => window.location.href = "/"}>
           Users
         </button>
         <ListEspecificConnections />
@@ -69,5 +69,15 @@ const EspecificConnections = () => {
     </Fragment>
   );
 };
+
+export interface ConnectionInterface{
+  user1_id: number; 
+  user2_id: number; 
+}
+
+export interface UserInterface{
+  id: number;
+  name: string;
+}
 
 export default App;
