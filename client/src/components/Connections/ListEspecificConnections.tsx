@@ -1,38 +1,49 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
+import { ConnectionInterface } from "../../App";
 
-const ListConnections = () => {
-  const [connections, setConnections] = useState([]);
 
-  const getConnections = async () => {
+
+const ListEspecificConnections = () => {
+  const params = useParams();
+  const [connections, setConnections] = useState<any | any[]>([]);
+
+  const GetConnections = async () => {
     try {
-      const response = await fetch("http://localhost:3000/connections");
+      const response = await fetch("http://localhost:3000/connections" + '/' + params.id);
       const jsonData = await response.json();
 
-      const tuples = [];
-      await jsonData.rows.map(async connection => {
+      const tuples: any[] = [];
+      await jsonData.map(async (connection:ConnectionInterface) => {
         const u1 = await getUserNamePromise(connection.user1_id);
         const u2 = await getUserNamePromise(connection.user2_id);
         tuples.push({ user1_id: connection.user1_id, user1_name: u1, user2_name: u2, user2_id: connection.user2_id })
         setConnections(tuples);
       });
-
     } catch (err) {
-      console.error(err.message);
+      if(err instanceof Error){
+        console.error(err.message);
+    }else{
+        console.error("Unexpected error",err);
+    }
     }
   };
 
   useEffect(() => {
-    getConnections();
+    GetConnections();
   }, []);
 
-  const getUserNamePromise = async (id) => {
+  const getUserNamePromise = async (id:number) => {
     try {
       const response = await fetch("http://localhost:3000/users" + "/" + id);
       const jsonData = await response.json();
       return jsonData.name;
-
     } catch (err) {
-      console.error(err.message);
+      if(err instanceof Error){
+        console.error(err.message);
+    }else{
+        console.error("Unexpected error",err);
+    }
     }
   };
 
@@ -49,8 +60,8 @@ const ListConnections = () => {
           </tr>
         </thead>
         <tbody>
-          {connections.map(connection => (
-            <tr key={[connection.user1_id, connection.user1_name, connection.user2_name, connection.user2_id]}>
+          {connections.map((connection:any) => (
+            <tr key={connection}>
               <td>{connection.user1_id}</td>
               <td>{connection.user1_name}</td>
               <td>{connection.user2_name}</td>
@@ -63,4 +74,4 @@ const ListConnections = () => {
   );
 };
 
-export default ListConnections;
+export default ListEspecificConnections;
