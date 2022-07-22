@@ -8,18 +8,26 @@ const ListEspecificConnections = () => {
   const params = useParams();
   const [connections, setConnections] = useState<any | any[]>([]);
 
-  const GetConnections = async () => {
+  const GetConnections =  () => {
     try {
-      const response = await fetch("http://localhost:3000/connections" + '/' + params.id);
-      const jsonData = await response.json();
+      const response =  fetch("http://localhost:3000/connections" + '/' + params.id);
 
-      const tuples: any[] = [];
-      await jsonData.map(async (connection:ConnectionInterface) => {
-        const u1 = await getUserNamePromise(connection.user1_id);
-        const u2 = await getUserNamePromise(connection.user2_id);
-        tuples.push({ user1_id: connection.user1_id, user1_name: u1, user2_name: u2, user2_id: connection.user2_id })
-        setConnections(tuples);
-      });
+      response.then((res) => {
+        const jsonData =  res.json();
+        jsonData.then((resJson) => {
+          const tuples: any[] = [];
+          resJson.map( (connection:ConnectionInterface) => {
+            const name1Promise =  getUserNamePromise(connection.user1_id);
+            const name2Promise =  getUserNamePromise(connection.user2_id);
+
+            Promise.all([name1Promise,name2Promise]).then((values) => {
+              console.log(values);
+              tuples.push({ user1_id: connection.user1_id, user1_name: values[0], user2_name: values[1], user2_id: connection.user2_id });
+              if(tuples.length == resJson.length) setConnections(tuples); 
+            });          
+          });
+        });
+      })  
     } catch (err) {
       if(err instanceof Error){
         console.error(err.message);
@@ -33,11 +41,18 @@ const ListEspecificConnections = () => {
     GetConnections();
   }, []);
 
-  const getUserNamePromise = async (id:number) => {
+  const getUserNamePromise =  (id:number) => {
     try {
-      const response = await fetch("http://localhost:3000/users" + "/" + id);
-      const jsonData = await response.json();
-      return jsonData.name;
+      const response =  fetch("http://localhost:3000/users" + "/" + id);
+      return response.then((res) => {
+        const jsonData =  res.json();
+        return jsonData.then((resJsonData) => {
+          //console.log(resJsonData.name);
+          return resJsonData.name;
+        })
+      });
+
+      
     } catch (err) {
       if(err instanceof Error){
         console.error(err.message);

@@ -31,7 +31,6 @@ function App() {
 const Users = () => {
   return (
     <Fragment>
-      <h1>Prueba en Typescript feature</h1>
       <div className='container'>
         <button className="btn btn-primary mt-3" onClick={() => window.location.href = "/connections"}>
           Connections

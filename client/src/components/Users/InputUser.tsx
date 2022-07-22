@@ -3,15 +3,38 @@ import React, { Fragment, useState } from "react";
 const InputUser = () => {
   const [name, setName] = useState("");
 
-  const onSubmitForm = async (e:any) => {
+  // const onSubmitForm = async (e:any) => {
+  //   e.preventDefault();
+  //   try {
+  //     const body = { name };
+  //     const response = await fetch("http://localhost:3000/users", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(body)
+  //     });
+  //     window.location.href = '/';
+  //   } catch (err) {
+  //     if(err instanceof Error){
+  //       console.error(err.message);
+  //   }else{
+  //       console.error("Unexpected error",err);
+  //   }
+  //   }
+  // };
+
+  const onSubmitForm = (e:any) => {
     e.preventDefault();
     try {
       const body = { name };
-      const response = await fetch("http://localhost:3000/users", {
+      const response = fetch("http://localhost:3000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
+
+      response.then(() => {
+        console.log("listo")
+      })
       window.location.href = '/';
     } catch (err) {
       if(err instanceof Error){
