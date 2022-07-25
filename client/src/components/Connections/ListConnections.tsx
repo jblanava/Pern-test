@@ -4,30 +4,8 @@ import { ConnectionInterface } from '../../App'
 const ListConnections = () => {
   const [connections, setConnections] = useState<any | any[]>([]);
 
-  // const getConnections = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:3000/connections");
-  //     const jsonData = await response.json();
-
-  //     const tuples: any[] = [];
-  //     await jsonData.rows.map(async (connection:ConnectionInterface) => {
-  //       const u1 = await getUserNamePromise(connection.user1_id);
-  //       const u2 = await getUserNamePromise(connection.user2_id);
-  //       tuples.push({ user1_id: connection.user1_id, user1_name: u1, user2_name: u2, user2_id: connection.user2_id });
-  //       setConnections(tuples);
-  //     });
-
-  //   } catch (err) {
-  //     if(err instanceof Error){
-  //       console.error(err.message);
-  //   }else{
-  //       console.error("Unexpected error",err);
-  //   }
-  //   }
-  // };
-
   const getConnections =  () => {
-    try {
+
       const response = fetch("http://localhost:3000/connections");
       response.then((res) => {
         const jsonData =  res.json();
@@ -45,37 +23,14 @@ const ListConnections = () => {
           });
         });
       })  
-
-    } catch (err) {
-      if(err instanceof Error){
-        console.error(err.message);
-    }else{
-        console.error("Unexpected error",err);
-    }
-    }
   };
 
   useEffect(() => {
     getConnections();
   }, []);
 
-  // const getUserNamePromise = async (id:number) => {
-  //   try {
-  //     const response = await fetch("http://localhost:3000/users" + "/" + id);
-  //     const jsonData = await response.json();
-  //     return jsonData.name;
-
-  //   } catch (err) {
-  //     if(err instanceof Error){
-  //       console.error(err.message);
-  //   }else{
-  //       console.error("Unexpected error",err);
-  //   }
-  //   }
-  // };
-
   const getUserNamePromise =  (id:number) => {
-    try {
+
       const response =  fetch("http://localhost:3000/users" + "/" + id);
       return response.then((res) => {
         const jsonData =  res.json();
@@ -84,15 +39,6 @@ const ListConnections = () => {
           return resJsonData.name;
         })
       });
-
-      
-    } catch (err) {
-      if(err instanceof Error){
-        console.error(err.message);
-    }else{
-        console.error("Unexpected error",err);
-    }
-    }
   };
 
   return (

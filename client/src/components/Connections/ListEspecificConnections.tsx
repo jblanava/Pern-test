@@ -9,7 +9,7 @@ const ListEspecificConnections = () => {
   const [connections, setConnections] = useState<any | any[]>([]);
 
   const GetConnections =  () => {
-    try {
+
       const response =  fetch("http://localhost:3000/connections" + '/' + params.id);
 
       response.then((res) => {
@@ -28,13 +28,6 @@ const ListEspecificConnections = () => {
           });
         });
       })  
-    } catch (err) {
-      if(err instanceof Error){
-        console.error(err.message);
-    }else{
-        console.error("Unexpected error",err);
-    }
-    }
   };
 
   useEffect(() => {
@@ -42,24 +35,13 @@ const ListEspecificConnections = () => {
   }, []);
 
   const getUserNamePromise =  (id:number) => {
-    try {
       const response =  fetch("http://localhost:3000/users" + "/" + id);
       return response.then((res) => {
         const jsonData =  res.json();
         return jsonData.then((resJsonData) => {
-          //console.log(resJsonData.name);
           return resJsonData.name;
         })
       });
-
-      
-    } catch (err) {
-      if(err instanceof Error){
-        console.error(err.message);
-    }else{
-        console.error("Unexpected error",err);
-    }
-    }
   };
 
   return (

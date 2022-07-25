@@ -3,22 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 const ListUsers = () => {
   const [users, setUsers] = useState<any>([]);
 
-  // const getUsers = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:3000/users");
-  //     const jsonData = await response.json();
-  //     setUsers(jsonData);
-  //   } catch (err) {
-  //     if(err instanceof Error){
-  //       console.error(err.message);
-  //   }else{
-  //       console.error("Unexpected error",err);
-  //   }
-  //   }
-  // };
-
   const getUsers =  () => {
-    try {
       const response =  fetch("http://localhost:3000/users");
 
       response
@@ -28,14 +13,6 @@ const ListUsers = () => {
           setUsers(res);
         });
       });
-
-    } catch (err) {
-      if(err instanceof Error){
-        console.error(err.message);
-    }else{
-        console.error("Unexpected error",err);
-    }
-    }
   };
 
   useEffect(() => {
