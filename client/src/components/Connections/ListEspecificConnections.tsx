@@ -11,23 +11,25 @@ const ListEspecificConnections = () => {
   const GetConnections =  () => {
 
       const response =  fetch("http://localhost:3000/connections" + '/' + params.id);
-
       response.then((res) => {
-        const jsonData =  res.json();
+        const jsonData = res.json();
         jsonData.then((resJson) => {
-          const tuples: any[] = [];
-          resJson.map( (connection:ConnectionInterface) => {
-            const name1Promise =  getUserNamePromise(connection.user1_id);
-            const name2Promise =  getUserNamePromise(connection.user2_id);
-
-            Promise.all([name1Promise,name2Promise]).then((values) => {
-              console.log(values);
-              tuples.push({ user1_id: connection.user1_id, user1_name: values[0], user2_name: values[1], user2_id: connection.user2_id });
-              if(tuples.length == resJson.length) setConnections(tuples); 
-            });          
+          const promisesArray = resJson.map((connection: ConnectionInterface) => {
+            const user1_id = Promise.resolve(connection.user1_id);
+            const name1Promise = getUserNamePromise(connection.user1_id);
+            const name2Promise = getUserNamePromise(connection.user2_id);
+            const user2_id = Promise.resolve(connection.user2_id);
+  
+            return Promise.all([user1_id,name1Promise, name2Promise, user2_id])
+          });
+          Promise.all(promisesArray).then((values) => {
+            const tuples = values.map(entry => {
+              return { user1_id: entry[0], user1_name: entry[1], user2_name: entry[2], user2_id: entry[3] } 
+            })
+            if (tuples.length == resJson.length) setConnections(tuples);
           });
         });
-      })  
+      }); 
   };
 
   useEffect(() => {
