@@ -9,10 +9,7 @@ const InputConnection = () => {
       const response = fetch("http://localhost:3000/connections" + "/" + user1 + "/" + user2, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-      });
-
-      response.then((res) => {
-      });
+      }).then(() => {}, (reason) => console.error("Create connection promise rejected : " + reason))
       window.location.href = '/connections';
   };
 

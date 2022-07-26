@@ -3,16 +3,13 @@ import React, { Fragment, useEffect, useState } from "react";
 const ListUsers = () => {
   const [users, setUsers] = useState<any>([]);
 
-  const getUsers =  () => {
-      const response =  fetch("http://localhost:3000/users");
-
-      response
-      .then( res => {
-        const jsonData = res.json()
+  const getUsers = () => {
+    fetch("http://localhost:3000/users").then(res => {
+      const jsonData = res.json()
         .then((res) => {
           setUsers(res);
-        });
-      });
+        }, (reason) => console.error("All users promise rejected : " + reason));
+    });
   };
 
   useEffect(() => {
@@ -31,7 +28,7 @@ const ListUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user:any) => (
+          {users.map((user: any) => (
             <tr key={user.usuario_id}>
               <td>{user.usuario_id}</td>
               <td>{user.name}</td>

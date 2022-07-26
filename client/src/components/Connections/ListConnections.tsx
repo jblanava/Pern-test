@@ -6,69 +6,63 @@ const ListConnections = () => {
 
   const getConnections = () => {
 
-    const response = fetch("http://localhost:3000/connections");
-    response.then((res) => {
-      const jsonData = res.json();
-      jsonData.then((resJson) => {
+    fetch("http://localhost:3000/connections")
+    .then((res) => {
+      res.json()
+      .then((resJson) => {
         const promisesArray = resJson.rows.map((connection: ConnectionInterface) => {
-          const user1_id = Promise.resolve(connection.user1_id);
           const name1Promise = getUserNamePromise(connection.user1_id);
           const name2Promise = getUserNamePromise(connection.user2_id);
-          const user2_id = Promise.resolve(connection.user2_id);
 
-          return Promise.all([user1_id,name1Promise, name2Promise, user2_id])
+          return Promise.all([name1Promise, name2Promise]).then((values) => {
+            return { user1_id: connection.user1_id, user1_name: values[0], user2_name: values[1], user2_id: connection.user2_id }   
+          })
         });
         Promise.all(promisesArray).then((values) => {
-          const tuples = values.map(entry => {
-            return { user1_id: entry[0], user1_name: entry[1], user2_name: entry[2], user2_id: entry[3] } 
-          })
-          if (tuples.length == resJson.rows.length) setConnections(tuples);
-        });
-      });
-    });
-};
+          if (values.length == resJson.rows.length){setConnections(values)}
+          else { console.error("Error with final tuple")};
+        }, (reason) => console.error("all names promise rejected : " + reason));
+      }, (reason) => console.error("res.json() promise rejected : " + reason));
+    }, (reason) => console.error("Especific connection promise rejected : " + reason));
+  };
 
-useEffect(() => {
-  getConnections();
-}, []);
-
-const getUserNamePromise = (id: number) => {
-
-  const response = fetch("http://localhost:3000/users" + "/" + id);
-  return response.then((res) => {
-    const jsonData = res.json();
-    return jsonData.then((resJsonData) => {
-      //console.log(resJsonData.name);
-      return resJsonData.name;
-    })
-  });
-};
-
-return (
-  <Fragment>
-    {" "}
-    <table className="table mt-5 text-center">
-      <thead>
-        <tr>
-          <th>User 1 ID</th>
-          <th>User 1 Name</th>
-          <th>User 2 Name </th>
-          <th>User 2 ID </th>
-        </tr>
-      </thead>
-      <tbody>
-        {connections.map((connection: any) => (
-          <tr key={connection}>
-            <td>{connection.user1_id}</td>
-            <td>{connection.user1_name}</td>
-            <td>{connection.user2_name}</td>
-            <td>{connection.user2_id}</td>
+  useEffect(() => {
+    getConnections();
+  }, []);
+  const getUserNamePromise = (id: number) => {
+    return fetch("http://localhost:3000/users" + "/" + id)
+    .then((res) => {
+      const jsonData = res.json();
+      return jsonData.then((resJsonData) => {
+        return resJsonData.name;
+      })
+    }, (reason) => console.error("Get username promise rejected : " + reason));
+  };
+  return (
+    <Fragment>
+      {" "}
+      <table className="table mt-5 text-center">
+        <thead>
+          <tr>
+            <th>User 1 ID</th>
+            <th>User 1 Name</th>
+            <th>User 2 Name </th>
+            <th>User 2 ID </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </Fragment>
-);
+        </thead>
+        <tbody>
+          {connections.map((connection: any) => (
+            <tr key={connection}>
+              <td>{connection.user1_id}</td>
+              <td>{connection.user1_name}</td>
+              <td>{connection.user2_name}</td>
+              <td>{connection.user2_id}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Fragment>
+  );
 };
 
 export default ListConnections;

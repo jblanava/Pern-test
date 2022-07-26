@@ -3,20 +3,16 @@ import React, { Fragment, useState } from "react";
 const InputUser = () => {
   const [name, setName] = useState("");
 
-  const onSubmitForm = (e:any) => {
+  const onSubmitForm = (e: any) => {
     e.preventDefault();
 
-      const body = { name };
-      const response = fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-      });
-
-      response.then(() => {
-        console.log("listo")
-      })
-      window.location.href = '/';
+    const body = { name };
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    }).then(() => {} , (reason) => console.error("Create user promise rejected : " + reason));
+    window.location.href = '/';
   };
 
   return (

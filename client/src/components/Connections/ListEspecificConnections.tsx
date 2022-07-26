@@ -8,42 +8,40 @@ const ListEspecificConnections = () => {
   const params = useParams();
   const [connections, setConnections] = useState<any | any[]>([]);
 
-  const GetConnections =  () => {
+  const GetConnections = () => {
 
-      const response =  fetch("http://localhost:3000/connections" + '/' + params.id);
-      response.then((res) => {
-        const jsonData = res.json();
-        jsonData.then((resJson) => {
+    fetch("http://localhost:3000/connections" + '/' + params.id)
+      .then((res) => {
+        res.json()
+        .then((resJson) => {
           const promisesArray = resJson.map((connection: ConnectionInterface) => {
-            const user1_id = Promise.resolve(connection.user1_id);
             const name1Promise = getUserNamePromise(connection.user1_id);
             const name2Promise = getUserNamePromise(connection.user2_id);
-            const user2_id = Promise.resolve(connection.user2_id);
-  
-            return Promise.all([user1_id,name1Promise, name2Promise, user2_id])
+
+            return Promise.all([name1Promise, name2Promise]).then((values) => {
+              return { user1_id: connection.user1_id, user1_name: values[0], user2_name: values[1], user2_id: connection.user2_id }   
+            })
           });
           Promise.all(promisesArray).then((values) => {
-            const tuples = values.map(entry => {
-              return { user1_id: entry[0], user1_name: entry[1], user2_name: entry[2], user2_id: entry[3] } 
-            })
-            if (tuples.length == resJson.length) setConnections(tuples);
-          });
-        });
-      }); 
+            if (values.length == resJson.length){setConnections(values)}
+            else { console.error("Error with final tuple")};
+          }, (reason) => console.error("all names promise rejected : " + reason));
+        }, (reason) => console.error("res.json() promise rejected : " + reason));
+      }, (reason) => console.error("Especific connection promise rejected : " + reason));
   };
 
   useEffect(() => {
     GetConnections();
   }, []);
 
-  const getUserNamePromise =  (id:number) => {
-      const response =  fetch("http://localhost:3000/users" + "/" + id);
-      return response.then((res) => {
-        const jsonData =  res.json();
-        return jsonData.then((resJsonData) => {
-          return resJsonData.name;
-        })
-      });
+  const getUserNamePromise = (id: number) => {
+    return fetch("http://localhost:3000/users" + "/" + id)
+    .then((res) => {
+      const jsonData = res.json();
+      return jsonData.then((resJsonData) => {
+        return resJsonData.name;
+      })
+    }, (reason) => console.error("Get username promise rejected : " + reason));
   };
 
   return (
@@ -59,7 +57,7 @@ const ListEspecificConnections = () => {
           </tr>
         </thead>
         <tbody>
-          {connections.map((connection:any) => (
+          {connections.map((connection: any) => (
             <tr key={connection}>
               <td>{connection.user1_id}</td>
               <td>{connection.user1_name}</td>
