@@ -3,18 +3,13 @@ import React, { Fragment, useEffect, useState } from "react";
 const ListUsers = () => {
   const [users, setUsers] = useState<any>([]);
 
-  const getUsers = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/users");
-      const jsonData = await response.json();
-      setUsers(jsonData);
-    } catch (err) {
-      if(err instanceof Error){
-        console.error(err.message);
-    }else{
-        console.error("Unexpected error",err);
-    }
-    }
+  const getUsers = () => {
+    fetch("http://localhost:3000/users").then(res => {
+      res.json()
+        .then((res) => {
+          setUsers(res);
+        }, (reason) => console.error("All users promise rejected : " + reason));
+    });
   };
 
   useEffect(() => {
@@ -33,7 +28,7 @@ const ListUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user:any) => (
+          {users.map((user: any) => (
             <tr key={user.usuario_id}>
               <td>{user.usuario_id}</td>
               <td>{user.name}</td>

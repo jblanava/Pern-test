@@ -15,4 +15,4 @@ CREATE TABLE connection
     ),
     FOREIGN KEY (user1_id) REFERENCES usuario (usuario_id),
     FOREIGN KEY (user2_id) REFERENCES usuario (usuario_id)
-)
+);

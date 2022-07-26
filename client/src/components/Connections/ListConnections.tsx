@@ -4,47 +4,41 @@ import { ConnectionInterface } from '../../App'
 const ListConnections = () => {
   const [connections, setConnections] = useState<any | any[]>([]);
 
-  const getConnections = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/connections");
-      const jsonData = await response.json();
+  const getConnections = () => {
 
-      const tuples: any[] = [];
-      await jsonData.rows.map(async (connection:ConnectionInterface) => {
-        const u1 = await getUserNamePromise(connection.user1_id);
-        const u2 = await getUserNamePromise(connection.user2_id);
-        tuples.push({ user1_id: connection.user1_id, user1_name: u1, user2_name: u2, user2_id: connection.user2_id });
-        setConnections(tuples);
-      });
+    fetch("http://localhost:3000/connections")
+    .then((res) => {
+      res.json()
+      .then((resJson) => {
+        const promisesArray = resJson.rows.map((connection: ConnectionInterface) => {
+          const name1Promise = getUserNamePromise(connection.user1_id);
+          const name2Promise = getUserNamePromise(connection.user2_id);
 
-    } catch (err) {
-      if(err instanceof Error){
-        console.error(err.message);
-    }else{
-        console.error("Unexpected error",err);
-    }
-    }
+          return Promise.all([name1Promise, name2Promise]).then((values) => {
+            return { user1_id: connection.user1_id, user1_name: values[0], user2_name: values[1], user2_id: connection.user2_id }   
+          })
+        });
+        Promise.all(promisesArray).then((values) => {
+          if (values.length == resJson.rows.length){setConnections(values)}
+          else { console.error("Error with final tuple")};
+        }, (reason) => console.error("all names promise rejected : " + reason));
+      }, (reason) => console.error("res.json() promise rejected : " + reason));
+    }, (reason) => console.error("Especific connection promise rejected : " + reason));
   };
 
   useEffect(() => {
     getConnections();
   }, []);
-
-  const getUserNamePromise = async (id:number) => {
-    try {
-      const response = await fetch("http://localhost:3000/users" + "/" + id);
-      const jsonData = await response.json();
-      return jsonData.name;
-
-    } catch (err) {
-      if(err instanceof Error){
-        console.error(err.message);
-    }else{
-        console.error("Unexpected error",err);
-    }
-    }
+  
+  const getUserNamePromise = (id: number) => {
+    return fetch("http://localhost:3000/users" + "/" + id)
+    .then((res) => {
+      const jsonData = res.json();
+      return jsonData.then((resJsonData) => {
+        return resJsonData.name;
+      })
+    }, (reason) => console.error("Get username promise rejected : " + reason));
   };
-
   return (
     <Fragment>
       {" "}
@@ -58,7 +52,7 @@ const ListConnections = () => {
           </tr>
         </thead>
         <tbody>
-          {connections.map((connection:any) => (
+          {connections.map((connection: any) => (
             <tr key={connection}>
               <td>{connection.user1_id}</td>
               <td>{connection.user1_name}</td>
