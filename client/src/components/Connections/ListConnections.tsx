@@ -29,6 +29,7 @@ const ListConnections = () => {
   useEffect(() => {
     getConnections();
   }, []);
+  
   const getUserNamePromise = (id: number) => {
     return fetch("http://localhost:3000/users" + "/" + id)
     .then((res) => {

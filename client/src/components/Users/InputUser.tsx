@@ -11,7 +11,8 @@ const InputUser = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)
-    }).then(() => {} , (reason) => console.error("Create user promise rejected : " + reason));
+    })
+    .then(() => {} , (reason) => console.error("Create user promise rejected : " + reason));
     window.location.href = '/';
   };
 

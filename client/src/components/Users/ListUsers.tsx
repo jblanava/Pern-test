@@ -5,7 +5,7 @@ const ListUsers = () => {
 
   const getUsers = () => {
     fetch("http://localhost:3000/users").then(res => {
-      const jsonData = res.json()
+      res.json()
         .then((res) => {
           setUsers(res);
         }, (reason) => console.error("All users promise rejected : " + reason));

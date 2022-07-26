@@ -20,7 +20,7 @@ const ListEspecificConnections = () => {
 
             return Promise.all([name1Promise, name2Promise]).then((values) => {
               return { user1_id: connection.user1_id, user1_name: values[0], user2_name: values[1], user2_id: connection.user2_id }   
-            })
+            }, (reason) => console.error("all names list promise rejected : " + reason))
           });
           Promise.all(promisesArray).then((values) => {
             if (values.length == resJson.length){setConnections(values)}
