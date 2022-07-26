@@ -1,15 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { ConnectionInterface } from "../../App";
-
-
+import { ConnectionInterface } from "../../pages/Connection";
 
 const ListEspecificConnections = () => {
   const params = useParams();
   const [connections, setConnections] = useState<any | any[]>([]);
 
   const GetConnections = () => {
-
     fetch("http://localhost:3000/connections" + '/' + params.id)
       .then((res) => {
         res.json()
@@ -58,7 +55,7 @@ const ListEspecificConnections = () => {
         </thead>
         <tbody>
           {connections.map((connection: any) => (
-            <tr key={connection}>
+            <tr key={`${connection.user1_id}  ${connection.user2_id}`}>
               <td>{connection.user1_id}</td>
               <td>{connection.user1_name}</td>
               <td>{connection.user2_name}</td>

@@ -1,23 +1,18 @@
 import React, { Fragment, useState } from "react";
 
-const InputConnection = () => {
+
+interface ConnectionInput{
+  onSubmitForm: (e: any,user1:string, user2:string) => void;
+}
+
+const InputConnection = (props: ConnectionInput) => {
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
-
-  const onSubmitForm = (e: any) => {
-    e.preventDefault();
-    fetch("http://localhost:3000/connections" + "/" + user1 + "/" + user2, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    })
-    .then(() => { }, (reason) => console.error("Create connection promise rejected : " + reason))
-    window.location.href = '/connections';
-  };
 
   return (
     <Fragment>
       <h1 className="text-center mt-5">Connections List</h1>
-      <form className="d-flex mt-5" onSubmit={onSubmitForm}>
+      <form className="d-flex mt-5" onSubmit={(e) => props.onSubmitForm(e,user1,user2)}>
         <input
           type="text"
           className="form-control"

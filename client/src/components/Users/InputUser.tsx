@@ -1,25 +1,16 @@
 import React, { Fragment, useState } from "react";
 
-const InputUser = () => {
+interface UserInputProps{
+  onSubmitForm: (e: any, name: string) => void;
+}
+
+const InputUser = (props: UserInputProps) => {
   const [name, setName] = useState("");
-
-  const onSubmitForm = (e: any) => {
-    e.preventDefault();
-
-    const body = { name };
-    fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    })
-    .then(() => {} , (reason) => console.error("Create user promise rejected : " + reason));
-    window.location.href = '/';
-  };
 
   return (
     <Fragment>
       <h1 className="text-center mt-5">User List</h1>
-      <form className="d-flex mt-5" onSubmit={onSubmitForm}>
+      <form className="d-flex mt-5" onSubmit={(e) => props.onSubmitForm(e, name)}>
         <input
           type="text"
           className="form-control"

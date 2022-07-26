@@ -1,20 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 
-const ListUsers = () => {
-  const [users, setUsers] = useState<any>([]);
+interface ListUsersProp {
+  users : any[];
+}
 
-  const getUsers = () => {
-    fetch("http://localhost:3000/users").then(res => {
-      res.json()
-        .then((res) => {
-          setUsers(res);
-        }, (reason) => console.error("All users promise rejected : " + reason));
-    });
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []);
+const ListUsers = (props: ListUsersProp) => {
 
   return (
     <Fragment>
@@ -28,7 +18,7 @@ const ListUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user: any) => (
+          {props.users.map((user: any) => (
             <tr key={user.usuario_id}>
               <td>{user.usuario_id}</td>
               <td>{user.name}</td>
