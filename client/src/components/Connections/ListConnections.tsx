@@ -1,44 +1,11 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { ConnectionInterface } from '../../App'
+import { Fragment } from "react";
 
-const ListConnections = () => {
-  const [connections, setConnections] = useState<any | any[]>([]);
+interface ListProps{
+  list: any[];
+}
 
-  const getConnections = () => {
+export const ListConnections = (props:ListProps) => {
 
-    fetch("http://localhost:3000/connections")
-    .then((res) => {
-      res.json()
-      .then((resJson) => {
-        const promisesArray = resJson.rows.map((connection: ConnectionInterface) => {
-          const name1Promise = getUserNamePromise(connection.user1_id);
-          const name2Promise = getUserNamePromise(connection.user2_id);
-
-          return Promise.all([name1Promise, name2Promise]).then((values) => {
-            return { user1_id: connection.user1_id, user1_name: values[0], user2_name: values[1], user2_id: connection.user2_id }   
-          })
-        });
-        Promise.all(promisesArray).then((values) => {
-          if (values.length == resJson.rows.length){setConnections(values)}
-          else { console.error("Error with final tuple")};
-        }, (reason) => console.error("all names promise rejected : " + reason));
-      }, (reason) => console.error("res.json() promise rejected : " + reason));
-    }, (reason) => console.error("Especific connection promise rejected : " + reason));
-  };
-
-  useEffect(() => {
-    getConnections();
-  }, []);
-  
-  const getUserNamePromise = (id: number) => {
-    return fetch("http://localhost:3000/users" + "/" + id)
-    .then((res) => {
-      const jsonData = res.json();
-      return jsonData.then((resJsonData) => {
-        return resJsonData.name;
-      })
-    }, (reason) => console.error("Get username promise rejected : " + reason));
-  };
   return (
     <Fragment>
       {" "}
@@ -52,8 +19,8 @@ const ListConnections = () => {
           </tr>
         </thead>
         <tbody>
-          {connections.map((connection: any) => (
-            <tr key={connection}>
+          {props.list.map((connection: any) => (
+            <tr key={`${connection.user1_id}  ${connection.user2_id}`}>
               <td>{connection.user1_id}</td>
               <td>{connection.user1_name}</td>
               <td>{connection.user2_name}</td>
