@@ -16,7 +16,6 @@ function App() {
         <Route path="/" element={<Users />} />
         <Route path="/connections" element={<Connections />} />
         <Route path="/connections/:id" element={<Connections />} />
-        {/* <Route path="/connections/:id" element={<EspecificConnections />} /> */}
       </Routes>
     </Router>
   );
