@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import InputConnection from "../components/Connections/InputConnection";
 import ListConnections from "../components/Connections/ListConnections";
+import { useParams } from "react-router-dom";
 
 export interface ConnectionInterface {
   user1_id: number;
@@ -8,6 +9,14 @@ export interface ConnectionInterface {
 }
 
 export const Connections = () => {
+
+  const params = useParams();
+  let getConnectionTableString = "http://localhost:3000/connections-table"
+
+  const isGeneral:boolean = params.id === undefined;
+
+  if(!isGeneral) getConnectionTableString += '/' + params.id;
+  console.log(getConnectionTableString);
 
   const [connections, setConnections] = useState<any[]>([]);
 
@@ -38,11 +47,15 @@ export const Connections = () => {
 
   const getConnectionsTable = () => {
 
-    fetch("http://localhost:3000/connections-table")
+    fetch(getConnectionTableString)
       .then((res) => {
         res.json()
           .then((resJson) => {
-            setConnections(resJson.rows);
+            if(isGeneral){
+              setConnections(resJson.rows);
+            }else{
+              setConnections(resJson);
+            }
           }).catch((reason) => console.error("res.json() promise rejected : " + reason));
       }).catch((reason) => console.error("Especific connection promise rejected : " + reason));
   };
@@ -61,13 +74,15 @@ export const Connections = () => {
       }).catch((reason) => console.error("Get username promise rejected : " + reason));
   };
 
+  const InputConnectionHTML = isGeneral? <InputConnection onSubmitForm={onSubmitForm} /> : <h1 className="text-center mt-5">User with ID {params.id} connections</h1>
+
   return (
     <Fragment>
       <div className='container'>
         <button className="btn btn-primary mt-3" onClick={() => window.location.href = "/"}>
           Users
         </button>
-        <InputConnection onSubmitForm={onSubmitForm} />
+        {InputConnectionHTML}
         <ListConnections list={connections} />
       </div>
     </Fragment>
