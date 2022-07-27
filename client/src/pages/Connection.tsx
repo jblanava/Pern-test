@@ -14,13 +14,12 @@ interface connection {
 }
 
 export const Connections = () => {
+
   const params = useParams();
   let getConnectionTableString = "http://localhost:3000/connections-table";
-
   const isGeneral: boolean = params.id === undefined;
-
   if (!isGeneral) getConnectionTableString += "/" + params.id;
-  console.log(getConnectionTableString);
+
 
   const [connections, setConnections] = useState<connection[]>([]);
 
@@ -32,7 +31,7 @@ export const Connections = () => {
     })
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
-          res.json();
+          return res.json();
         }
       })
       .then((resJson: any) => {
@@ -58,9 +57,10 @@ export const Connections = () => {
   const getConnectionsTable = () => {
     fetch(getConnectionTableString)
       .then((res) => {
-        res.json();
+       return res.json();
       })
       .then((resJson: any) => {
+        console.log(resJson);
         if (isGeneral) {
           setConnections(resJson.rows);
         } else {
