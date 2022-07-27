@@ -7,7 +7,6 @@ import {
 
 //components
 import { Connections } from './pages/Connection';
-import { EspecificConnections } from './pages/EspecificConnection';
 import { Users } from './pages/User';
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Users />} />
         <Route path="/connections" element={<Connections />} />
-        <Route path="/connections/:id" element={<EspecificConnections />} />
+        <Route path="/connections/:id" element={<Connections />} />
       </Routes>
     </Router>
   );
