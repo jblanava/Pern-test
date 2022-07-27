@@ -4,21 +4,14 @@ const InputConnection = () => {
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
 
-  const onSubmitForm = async (e:any) => {
+  const onSubmitForm = (e: any) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3000/connections" + "/" + user1 + "/" + user2, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-      window.location.href = '/connections';
-    } catch (err) {
-      if(err instanceof Error){
-        console.error(err.message);
-    }else{
-        console.error("Unexpected error",err);
-    }
-    }
+    fetch("http://localhost:3000/connections" + "/" + user1 + "/" + user2, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
+    .then(() => { }, (reason) => console.error("Create connection promise rejected : " + reason))
+    window.location.href = '/connections';
   };
 
   return (
