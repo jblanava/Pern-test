@@ -1,5 +1,4 @@
 import './App.css';
-import React, { Fragment } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -7,11 +6,6 @@ import {
 } from "react-router-dom";
 
 //components
-
-import InputUser from './components/Users/InputUser';
-import ListUsers from './components/Users/ListUsers';
-
-import ListEspecificConnections from './components/Connections/ListEspecificConnections';
 import { Connections } from './pages/Connection';
 import { EspecificConnections } from './pages/EspecificConnection';
 import { Users } from './pages/User';
