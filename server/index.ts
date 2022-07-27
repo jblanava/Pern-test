@@ -84,6 +84,26 @@ app.get("/connections", async (req:any,res:any) =>
     }
 })
 
+// get table of all connections
+app.get("/connections-table", async (req:any,res:any) =>
+{
+    try {
+        const getAllTableConnections = await psqlPool.query(
+           `SELECT u1.usuario_id AS user1_id,u1.name AS user1_name,u2.name AS user2_name,u2.usuario_id AS user2_id 
+           FROM usuario u1 FULL OUTER JOIN connection c ON u1.usuario_id = c.user1_id 
+           Join usuario u2 ON u2.usuario_id = c.user2_id;`
+        );
+        res.json(getAllTableConnections)
+    } catch (err) {
+        if(err instanceof Error){
+            console.error(err.message);
+        }else{
+            console.error("Unexpected error",err);
+        }
+    }
+})
+
+
 
 // get a user
 app.get("/users/:id", async (req:any,res:any) =>
@@ -105,14 +125,18 @@ app.get("/users/:id", async (req:any,res:any) =>
 })
 
 // get a user connections
-app.get("/connections/:id", async (req:any,res:any) =>
+app.get("/connections-table/:id", async (req:any,res:any) =>
 {
     try {
         const {id} = req.params;
         const getConnections = await psqlPool.query(
-            "SELECT * FROM connection WHERE user1_id = $1 OR user2_id = $1",
+
+            `SELECT u1.usuario_id AS user1_id,u1.name AS user1_name,u2.name AS user2_name,u2.usuario_id AS user2_id 
+            FROM usuario u1 FULL OUTER JOIN connection c ON u1.usuario_id = c.user1_id 
+            Join usuario u2 ON u2.usuario_id = c.user2_id
+            WHERE user1_id = $1 OR user2_id = $1;`,
             [id]
-        );
+        );   
         res.json(getConnections.rows)
     } catch (err) {
         if(err instanceof Error){
