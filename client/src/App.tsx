@@ -5,9 +5,14 @@ import {
   Routes
 } from "react-router-dom";
 
+
+
 //components
 import { Connections } from './pages/Connection';
 import { Users } from './pages/User';
+
+
+export const URL_BASE: string = 'http://' + 'localhost' + ':' + '3000';
 
 function App() {
   return (

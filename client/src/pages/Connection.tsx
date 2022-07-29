@@ -2,6 +2,9 @@ import React, { Fragment, useEffect, useState } from "react";
 import InputConnection from "../components/Connections/InputConnection";
 import ListConnections from "../components/Connections/ListConnections";
 import { useParams } from "react-router-dom";
+import { URL_BASE } from "../App";
+
+
 
 export interface ConnectionInterface {
   user1_id: number;
@@ -16,16 +19,18 @@ interface connection {
 export const Connections = () => {
 
   const params = useParams();
-  let getConnectionTableString = "http://localhost:3000/connections-table";
+  let getConnectionTableString = URL_BASE + "/connections-table";
   const isGeneral: boolean = params.id === undefined;
   if (!isGeneral) getConnectionTableString += "/" + params.id;
+
+  console.log(URL_BASE);
 
 
   const [connections, setConnections] = useState<connection[]>([]);
 
   const onSubmitForm = (e: any, user1: string, user2: string) => {
     e.preventDefault();
-    fetch("http://localhost:3000/connections/" + user1 + "/" + user2, {
+    fetch(URL_BASE +  "/connections/" + user1 + "/" + user2, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     })
@@ -35,7 +40,6 @@ export const Connections = () => {
         }
       })
       .then((resJson: any) => {
-        console.log(resJson[0].user1_id);
         const name1Promise = getUserNamePromise(resJson[0].user1_id);
         const name2Promise = getUserNamePromise(resJson[0].user2_id);
 
@@ -60,7 +64,6 @@ export const Connections = () => {
        return res.json();
       })
       .then((resJson: any) => {
-        console.log(resJson);
         if (isGeneral) {
           setConnections(resJson.rows);
         } else {
@@ -77,7 +80,7 @@ export const Connections = () => {
   }, []);
 
   const getUserNamePromise = (id: number) => {
-    return fetch("http://localhost:3000/users/" + id)
+    return fetch(URL_BASE +  "/users/" + id)
       .then((res) => {
         const jsonData = res.json();
         return jsonData.then((resJsonData) => {

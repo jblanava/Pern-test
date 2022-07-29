@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 
 interface UserInputProps{
   onSubmitForm: (e: any, name: string) => void;
