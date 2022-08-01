@@ -11,6 +11,9 @@ node_modules
 # production
 /build
 
+#docker-compose
+/postgresql
+
 # misc
 .DS_Store
 .env.local

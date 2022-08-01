@@ -1,6 +1,6 @@
-CREATE DATABASE pernprueba;
+-- CREATE DATABASE pernprueba;
 
-\c pernprueba;
+-- \c pernprueba;
 
 CREATE TABLE usuario (usuario_id SERIAL PRIMARY KEY,name VARCHAR(255));
 

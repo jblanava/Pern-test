@@ -1,0 +1,35 @@
+version: '1'
+services:
+    postgres:
+        image: postgres:latest
+        container_name: postgres
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_PASSWORD: password
+        volumes:
+            - ./postgresql/data:/var/lib/postgresql/data
+    server:
+        container_name: server
+        env_file:
+            - .env
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        volumes:
+            - /app/node_modules
+            - ./service/config:/app/config
+            - ./service/src:/app/src
+            - ./service/test:/app/test
+        ports:
+            - "2000:2000"
+    client:
+        container_name: client
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        volumes:
+            - /app/node_modules
+            - ./ui:/app
+        ports:
+            - "3000:3000"
