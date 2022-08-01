@@ -3,8 +3,8 @@ FROM node:16.16.0-alpine3.15 as common-build-stage
 # set working directory
 WORKDIR /app/
 
-COPY ./package.json  .package.json
-COPY ./package-lock.json  .package-lock.json
+COPY ./package.json  .
+COPY ./package-lock.json  .
 # install app dependencies
 RUN npm install 
 
