@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 
 interface ConnectionInput{
@@ -10,7 +10,7 @@ const InputConnection = (props: ConnectionInput) => {
   const [user2, setUser2] = useState("");
 
   return (
-    <Fragment>
+    <>
       <h1 className="text-center mt-5">Connections List</h1>
       <form className="d-flex mt-5" onSubmit={(e) => props.onSubmitForm(e,user1,user2)}>
         <input
@@ -26,7 +26,7 @@ const InputConnection = (props: ConnectionInput) => {
         />
         <button className="btn btn-success">Add</button>
       </form>
-    </Fragment>
+    </>
   );
 };
 

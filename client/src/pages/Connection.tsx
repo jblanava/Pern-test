@@ -23,8 +23,6 @@ export const Connections = () => {
   const isGeneral: boolean = params.id === undefined;
   if (!isGeneral) getConnectionTableString += "/" + params.id;
 
-  console.log(URL_BASE);
-
 
   const [connections, setConnections] = useState<connection[]>([]);
 

@@ -16,11 +16,6 @@ services:
         build:
             context: ./server
             dockerfile: Dockerfile
-        volumes:
-            - /app/node_modules
-            - ./service/config:/app/config
-            - ./service/src:/app/src
-            - ./service/test:/app/test
         ports:
             - "2000:2000"
     client:
@@ -28,8 +23,5 @@ services:
         build:
             context: ./client
             dockerfile: Dockerfile
-        volumes:
-            - /app/node_modules
-            - ./ui:/app
         ports:
             - "3000:3000"

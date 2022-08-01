@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 interface ListProps{
   list: any[];
 }
@@ -7,7 +5,7 @@ interface ListProps{
 export const ListConnections = (props:ListProps) => {
 
   return (
-    <Fragment>
+    <>
       {" "}
       <table className="table mt-5 text-center">
         <thead>
@@ -29,7 +27,7 @@ export const ListConnections = (props:ListProps) => {
           ))}
         </tbody>
       </table>
-    </Fragment>
+    </>
   );
 };
 

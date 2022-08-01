@@ -5,15 +5,11 @@ import {
   Routes
 } from "react-router-dom";
 
-
-
 //components
 import { Connections } from './pages/Connection';
 import { Users } from './pages/User';
 
 export const URL_BASE: string = 'http://' + process.env.REACT_APP_SERVER_HOST + ':' + process.env.REACT_APP_SERVER_PORT;
-
-console.log(URL_BASE);
 
 function App() {
   return (

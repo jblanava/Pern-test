@@ -1,5 +1,3 @@
-import { Fragment} from "react";
-
 interface ListUsersProp {
   users : any[];
 }
@@ -7,7 +5,7 @@ interface ListUsersProp {
 const ListUsers = (props: ListUsersProp) => {
 
   return (
-    <Fragment>
+    <>
       {" "}
       <table className="table mt-5 text-center">
         <thead>
@@ -31,7 +29,7 @@ const ListUsers = (props: ListUsersProp) => {
           ))}
         </tbody>
       </table>
-    </Fragment>
+    </>
   );
 };
 

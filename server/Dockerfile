@@ -4,13 +4,6 @@ FROM node:16.16.0-alpine3.15 as common-build-stage
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# ENV POSTGRES_HOST=postgres
-# ENV POSTGRES_PORT=5432
-# ENV POSTGRES_DB=postgres
-# ENV POSTGRES_USER=postgres
-# ENV POSTGRES_PASSWORD=password
-# ENV DATABASE_URL=postgres://postgres:password@postgres:5432/postgres
-
 # Install app dependencies
 COPY package.json /usr/src/app/
 RUN npm install
