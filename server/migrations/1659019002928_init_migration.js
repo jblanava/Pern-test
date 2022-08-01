@@ -24,9 +24,10 @@ exports.up = pgm => {
 
 };
 
-exports.down = pgm => {pgm.sql(`
-    DROP TABLE usuario;
-    DROP TABLE connection;
+exports.down = pgm => {
+    pgm.sql(
+    `DROP TABLE connection CASCADE;
+    DROP TABLE usuario CASCADE;
     `)};
 
 

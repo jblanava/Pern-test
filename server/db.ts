@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+console.log(process.env);
+
 const Pool: any = require("pg").Pool;
 
 const pool = new Pool({

@@ -11,6 +11,8 @@ services:
             - ./postgresql/data:/var/lib/postgresql/data
     server:
         container_name: server
+        depends_on:
+            - "postgres"
         env_file:
             - ./server.env
         build:
@@ -20,10 +22,12 @@ services:
             - "2000:2000"
     client:
         container_name: client
+        depends_on:
+            - "server"
         build:
             context: ./client
             dockerfile: Dockerfile
         ports:
             - "3000:3000"
-        env_file:
-            - ./client.env
+
+            

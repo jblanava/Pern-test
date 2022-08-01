@@ -15,11 +15,7 @@ RUN npm install
 COPY ./index.ts ./index.ts
 COPY ./db.ts ./db.ts
 COPY ./tsconfig.json ./tsconfig.json
-COPY ./database.sql ./database.sql
-
-# Bundle app source
-COPY . /usr/src/app
-
+COPY ./migrations ./migrations
 
 EXPOSE 2000
 CMD [ "npm", "run", "serve" ]
