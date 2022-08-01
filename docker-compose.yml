@@ -1,4 +1,4 @@
-version: '1'
+version: '3'
 services:
     postgres:
         image: postgres:latest
@@ -12,7 +12,7 @@ services:
     server:
         container_name: server
         env_file:
-            - .env
+            - ./server.env
         build:
             context: ./server
             dockerfile: Dockerfile
@@ -25,3 +25,5 @@ services:
             dockerfile: Dockerfile
         ports:
             - "3000:3000"
+        env_file:
+            - ./client.env

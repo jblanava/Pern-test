@@ -1,10 +1,8 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import InputConnection from "../components/Connections/InputConnection";
 import ListConnections from "../components/Connections/ListConnections";
 import { useParams } from "react-router-dom";
 import { URL_BASE } from "../App";
-
-
 
 export interface ConnectionInterface {
   user1_id: number;
@@ -22,7 +20,6 @@ export const Connections = () => {
   let getConnectionTableString = URL_BASE + "/connections-table";
   const isGeneral: boolean = params.id === undefined;
   if (!isGeneral) getConnectionTableString += "/" + params.id;
-
 
   const [connections, setConnections] = useState<connection[]>([]);
 

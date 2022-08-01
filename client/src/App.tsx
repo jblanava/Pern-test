@@ -9,7 +9,11 @@ import {
 import { Connections } from './pages/Connection';
 import { Users } from './pages/User';
 
-export const URL_BASE: string = 'http://' + process.env.REACT_APP_SERVER_HOST + ':' + process.env.REACT_APP_SERVER_PORT;
+export const URL_BASE: string = 'http://' + 'localhost' + ':' + '2000';
+
+console.log(process.env);
+
+console.log(process.env.REACT_APP_SERVER_HOST, process.env.REACT_APP_SERVER_PORT);
 
 function App() {
   return (

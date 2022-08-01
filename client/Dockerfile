@@ -12,9 +12,7 @@ RUN npm install
 # add app
 COPY . ./
 # start app
-
-CMD [ "npm", "run", "build" ]
-
+RUN npm run build
 
 FROM node:16.16.0-alpine3.15 as final-app 
 
