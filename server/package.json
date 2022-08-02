@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "tsc -p .",
     "serve": "npm run migrate up && nodemon index.ts ",
     "migrate": "node-pg-migrate",
     "try": "echo %EnvVar%"
