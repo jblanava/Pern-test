@@ -11,6 +11,8 @@ import { Users } from './pages/User';
 
 export const URL_BASE: string = 'http://' + process.env.REACT_APP_SERVER_HOST + ':' + process.env.REACT_APP_SERVER_PORT;  //export const URL_BASE: string = 'http://' + process.env.REACT_APP_SERVER_HOST + ':' + process.env.REACT_APP_SERVER_PORT;
 
+console.warn(URL_BASE);
+
 function App() {
   return (
     <Router>

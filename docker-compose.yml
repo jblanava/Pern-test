@@ -26,10 +26,12 @@ services:
             - "server"
         build:
             context: ./client
+            args:
+             - SERVER_HOST=${SERVER_HOST:-localhost}
+             - SERVER_PORT=${SERVER_PORT:-2000}
             dockerfile: Dockerfile
         ports:
             - "3000:3000"
-        env_file:
-            - ./client.env
+
 
             
