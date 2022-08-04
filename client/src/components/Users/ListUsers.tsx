@@ -6,8 +6,7 @@ const ListUsers = (props: ListUsersProp) => {
 
   return (
     <>
-      {" "}
-      <table className="table mt-5 text-center">
+      <table data-testid='listUser' className="table mt-5 text-center">
         <thead>
           <tr>
             <th>ID</th>
@@ -18,9 +17,9 @@ const ListUsers = (props: ListUsersProp) => {
         <tbody>
           {props.users.map((user: any) => (
             <tr key={user.usuario_id}>
-              <td>{user.usuario_id}</td>
-              <td>{user.name}</td>
-              <td><button
+              <td data-testid={`id ${user.usuario_id}`}>{user.usuario_id}</td>
+              <td data-testid={`name ${user.usuario_id}`}>{user.name}</td>
+              <td><button data-testid={`button ${user.usuario_id}`}
                 className="btn"
                 onClick={() => window.location.href = "/connections/" + user.usuario_id}>
                 {user.name + " connections"}

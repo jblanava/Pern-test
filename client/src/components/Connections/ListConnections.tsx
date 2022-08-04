@@ -12,8 +12,8 @@ export const ListConnections = (props:ListProps) => {
           <tr>
             <th>User 1 ID</th>
             <th>User 1 Name</th>
-            <th>User 2 Name </th>
-            <th>User 2 ID </th>
+            <th>User 2 Name</th>
+            <th>User 2 ID</th>
           </tr>
         </thead>
         <tbody>

@@ -11,18 +11,20 @@ const InputConnection = (props: ConnectionInput) => {
 
   return (
     <>
-      <h1 className="text-center mt-5">Connections List</h1>
+      <h1 data-testid="inputConnectionTitle" className="text-center mt-5">Connections List</h1>
       <form className="d-flex mt-5" onSubmit={(e) => props.onSubmitForm(e,user1,user2)}>
-        <input
+        <input data-testid='inputUserId1'
           type="text"
           className="form-control"
           value={user1}
           onChange={e => setUser1(e.target.value)}
-        /><input
+          required
+        /><input data-testid='inputUserId2'
           type="text"
           className="form-control"
           value={user2}
           onChange={e => setUser2(e.target.value)}
+          required
         />
         <button className="btn btn-success">Add</button>
       </form>
