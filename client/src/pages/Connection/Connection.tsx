@@ -1,8 +1,8 @@
-import { Fragment, useEffect, useState } from "react";
-import InputConnection from "../components/Connections/InputConnection";
-import ListConnections from "../components/Connections/ListConnections";
+import { useEffect, useState } from "react";
+import InputConnection from "../../components/Connections/InputConnection";
+import ListConnections from "../../components/Connections/ListConnections";
 import { useParams } from "react-router-dom";
-import { URL_BASE } from "../App";
+import { URL_BASE } from "../../App";
 
 export interface ConnectionInterface {
   user1_id: number;
@@ -14,7 +14,7 @@ interface connection {
   user2_id: number;
 }
 
-export const Connections = () => {
+export const Connection = () => {
 
   const params = useParams();
   let getConnectionTableString = URL_BASE + "/connections-table";
@@ -94,7 +94,7 @@ export const Connections = () => {
   );
 
   return (
-    <Fragment>
+    <>
       <div className="container">
         <button
           className="btn btn-primary mt-3"
@@ -105,6 +105,8 @@ export const Connections = () => {
         {InputConnectionHTML}
         <ListConnections list={connections} />
       </div>
-    </Fragment>
+    </>
   );
 };
+
+export default Connection

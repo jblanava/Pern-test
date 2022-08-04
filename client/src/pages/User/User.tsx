@@ -1,9 +1,9 @@
-import { Fragment, useEffect, useState } from "react";
-import { URL_BASE } from "../App";
-import InputUser from "../components/Users/InputUser";
-import ListUsers from "../components/Users/ListUsers";
+import { useEffect, useState } from "react";
+import { URL_BASE } from "../../App";
+import InputUser from "../../components/Users/InputUser";
+import ListUsers from "../../components/Users/ListUsers";
 
-export const Users = () => {
+export const User = () => {
   const [users, setUsers] = useState<any[]>([]);
 
   const onSubmitForm = (e: any, name: string) => {
@@ -46,7 +46,7 @@ export const Users = () => {
   }, []);
 
   return (
-    <Fragment>
+    <>
       <div className="container">
         <button
           className="btn btn-primary mt-3"
@@ -57,6 +57,6 @@ export const Users = () => {
         <InputUser onSubmitForm={onSubmitForm} />
         <ListUsers users={users} />
       </div>
-    </Fragment>
+    </>
   );
 };
