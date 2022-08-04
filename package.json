@@ -11,7 +11,7 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "test:client": "cd client && npm test && cd ..",
+    "test:client": "cd client && npm run test -- --watchAll=false && cd ..",
     "test:server": "cd server && npm test && cd .."
   },
   "devDependencies": {
