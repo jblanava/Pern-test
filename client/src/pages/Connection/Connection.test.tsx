@@ -9,7 +9,6 @@ afterEach(() => {
     jest.clearAllMocks();
 });
 
-
 it('renders Connection without crashing', () => {
     const utils = ShallowRenderer.createRenderer();
     utils.render(<Connection></Connection>);
