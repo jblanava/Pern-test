@@ -37,15 +37,21 @@ it('renders all ListConenction elements', () => {
   const rows =  screen.getAllByRole('row');
   expect(rows.length).toBe(mockListConnections.length + 1); // list.length + header
 
-  // eslint-disable-next-line testing-library/no-node-access
-  expect(rows[0].children[0].textContent).toBe('User 1 ID');
-  // eslint-disable-next-line testing-library/no-node-access
-  expect(rows[0].children[1].textContent).toBe('User 1 Name');
-  // eslint-disable-next-line testing-library/no-node-access
-  expect(rows[0].children[2].textContent).toBe('User 2 Name');
-  // eslint-disable-next-line testing-library/no-node-access
-  expect(rows[0].children[3].textContent).toBe('User 2 ID');
+  const u1IdHeader = screen.getByTestId('u1IdHeader');
+  expect(u1IdHeader.tagName).toBe('TH');
+  expect(u1IdHeader.textContent).toBe('User 1 ID');
 
+  const u1NameHeader = screen.getByTestId('u1NameHeader');
+  expect(u1NameHeader.tagName).toBe('TH');
+  expect(u1NameHeader.textContent).toBe('User 1 Name');
+
+  const u2NameHeader = screen.getByTestId('u2NameHeader');
+  expect(u2NameHeader.tagName).toBe('TH');
+  expect(u2NameHeader.textContent).toBe('User 2 Name');
+
+  const u2IdHeader = screen.getByTestId('u2IdHeader');
+  expect(u2IdHeader.tagName).toBe('TH');
+  expect(u2IdHeader.textContent).toBe('User 2 ID');
 })
 
 it('List renders all connections correctly', () => {
@@ -55,6 +61,7 @@ it('List renders all connections correctly', () => {
   expect(rows.length).toBe(mockListConnectionsFilled.length + 1); // list.length + header
 
   for(let i = 1; i < mockListConnectionsFilled.length; i++){
+    
     // eslint-disable-next-line testing-library/no-node-access
     expect(rows[i].children[0].textContent).toBe((mockListConnectionsFilled[i-1].user1_id).toString());
     // eslint-disable-next-line testing-library/no-node-access

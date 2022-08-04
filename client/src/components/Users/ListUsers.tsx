@@ -9,9 +9,9 @@ const ListUsers = (props: ListUsersProp) => {
       <table data-testid='listUser' className="table mt-5 text-center">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Connections</th>
+            <th data-testid={`idHeader`}>ID</th>
+            <th data-testid={`nameHeader`}>Name</th>
+            <th data-testid={`connectionsHeader`}>Connections</th>
           </tr>
         </thead>
         <tbody>

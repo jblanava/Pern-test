@@ -37,12 +37,17 @@ it('renders all ListConenction elements', () => {
   const rows =  screen.getAllByRole('row');
   expect(rows.length).toBe(mockListUsers.length + 1); // list.length + header
 
-  // eslint-disable-next-line testing-library/no-node-access
-  expect(rows[0].children[0].textContent).toBe('ID');
-  // eslint-disable-next-line testing-library/no-node-access
-  expect(rows[0].children[1].textContent).toBe('Name');
-  // eslint-disable-next-line testing-library/no-node-access
-  expect(rows[0].children[2].textContent).toBe('Connections');
+  const idHeader = screen.getByTestId('idHeader');
+  expect(idHeader.tagName).toBe('TH');
+  expect(idHeader.textContent).toBe('ID');
+
+  const nameHeader = screen.getByTestId('nameHeader');
+  expect(nameHeader.tagName).toBe('TH');
+  expect(nameHeader.textContent).toBe('Name');
+
+  const connectionsHeader = screen.getByTestId('connectionsHeader');
+  expect(connectionsHeader.tagName).toBe('TH');
+  expect(connectionsHeader.textContent).toBe('Connections');
 })
 
 it('renders all List users correctly', () => {
