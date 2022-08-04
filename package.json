@@ -9,8 +9,14 @@
     "react-router-dom": "^6.3.0",
     "ts-node": "^10.9.1"
   },
+  "scripts": {
+    "prepare": "husky install",
+    "test:client": "cd client && npm test && cd ..",
+    "test:server": "cd server && npm test && cd .."
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
+    "husky": "^8.0.1",
     "typescript": "^4.7.4"
   }
 }
