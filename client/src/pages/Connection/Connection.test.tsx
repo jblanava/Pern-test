@@ -1,15 +1,15 @@
-import ShallowRenderer from 'react-test-renderer/shallow';
-import Connection from './Connection'
+import ShallowRenderer from "react-test-renderer/shallow";
+import Connection from "./Connection";
 
 beforeEach(() => {
-    jest.clearAllMocks();
+  jest.clearAllMocks();
 });
 
 afterEach(() => {
-    jest.clearAllMocks();
+  jest.clearAllMocks();
 });
 
-it('renders Connection without crashing', () => {
-    const utils = ShallowRenderer.createRenderer();
-    utils.render(<Connection></Connection>);
-})
+it("renders Connection without crashing", () => {
+  const utils = ShallowRenderer.createRenderer();
+  utils.render(<Connection></Connection>);
+});

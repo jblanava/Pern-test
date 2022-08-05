@@ -1,37 +1,34 @@
-version: '3'
+version: "3"
 services:
-    postgres:
-        image: postgres:latest
-        container_name: postgres
-        ports:
-            - "5432:5432"
-        environment:
-            POSTGRES_PASSWORD: password
-        volumes:
-            - ./postgresql/data:/var/lib/postgresql/data
-    server:
-        container_name: server
-        depends_on:
-            - "postgres"
-        env_file:
-            - ./server.env
-        build:
-            context: ./server
-            dockerfile: Dockerfile
-        ports:
-            - "2000:2000"
-    client:
-        container_name: client
-        depends_on:
-            - "server"
-        build:
-            context: ./client
-            args:
-             - SERVER_HOST=${SERVER_HOST:-localhost}
-             - SERVER_PORT=${SERVER_PORT:-2000}
-            dockerfile: Dockerfile
-        ports:
-            - "3000:3000"
-
-
-            
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+  server:
+    container_name: server
+    depends_on:
+      - "postgres"
+    env_file:
+      - ./server.env
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "2000:2000"
+  client:
+    container_name: client
+    depends_on:
+      - "server"
+    build:
+      context: ./client
+      args:
+        - SERVER_HOST=${SERVER_HOST:-localhost}
+        - SERVER_PORT=${SERVER_PORT:-2000}
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"

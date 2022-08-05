@@ -1,9 +1,8 @@
-interface ListProps{
+interface ListProps {
   list: any[];
 }
 
-export const ListConnections = (props:ListProps) => {
-
+export const ListConnections = (props: ListProps) => {
   return (
     <>
       {" "}
@@ -19,10 +18,22 @@ export const ListConnections = (props:ListProps) => {
         <tbody>
           {props.list.map((connection: any) => (
             <tr key={`${connection.user1_id}  ${connection.user2_id}`}>
-              <td data-testid={`id1 ${connection.user1_id} id2 ${connection.user2_id}`}>{connection.user1_id}</td>
-              <td data-testid={`name1 ${connection.user1_name}`}>{connection.user1_name}</td>
-              <td data-testid={`name2 ${connection.user2_name}`}>{connection.user2_name}</td>
-              <td data-testid={`id2 ${connection.user2_id} id1 ${connection.user1_id}`}>{connection.user2_id}</td>
+              <td
+                data-testid={`id1 ${connection.user1_id} id2 ${connection.user2_id}`}
+              >
+                {connection.user1_id}
+              </td>
+              <td data-testid={`name1 ${connection.user1_name}`}>
+                {connection.user1_name}
+              </td>
+              <td data-testid={`name2 ${connection.user2_name}`}>
+                {connection.user2_name}
+              </td>
+              <td
+                data-testid={`id2 ${connection.user2_id} id1 ${connection.user1_id}`}
+              >
+                {connection.user2_id}
+              </td>
             </tr>
           ))}
         </tbody>
