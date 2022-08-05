@@ -6,16 +6,18 @@ import {
 } from "react-router-dom";
 
 //components
-import { Connections } from './pages/Connection';
-import { Users } from './pages/User';
+import { Connection } from './pages/Connection/Connection';
+import { User } from './pages/User/User';
+
+export const URL_BASE: string = 'http://' + process.env.REACT_APP_SERVER_HOST + ':' + process.env.REACT_APP_SERVER_PORT;
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Users />} />
-        <Route path="/connections" element={<Connections />} />
-        <Route path="/connections/:id" element={<Connections />} />
+        <Route path="/" element={<User />} />
+        <Route path="/connections" element={<Connection />} />
+        <Route path="/connections/:id" element={<Connection />} />
       </Routes>
     </Router>
   );

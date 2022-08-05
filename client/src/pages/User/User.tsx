@@ -1,22 +1,23 @@
-import { Fragment, useEffect, useState } from "react";
-import InputUser from "../components/Users/InputUser";
-import ListUsers from "../components/Users/ListUsers";
+import { useEffect, useState } from "react";
+import { URL_BASE } from "../../App";
+import InputUser from "../../components/Users/InputUser";
+import ListUsers from "../../components/Users/ListUsers";
 
-export const Users = () => {
+export const User = () => {
   const [users, setUsers] = useState<any[]>([]);
 
   const onSubmitForm = (e: any, name: string) => {
     e.preventDefault();
 
     const body = { name };
-    fetch("http://localhost:3000/users", {
+    fetch(URL_BASE +  "/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     })
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
-          res.json();
+          return res.json();
         }
       })
       .then((res) => {
@@ -28,7 +29,7 @@ export const Users = () => {
   };
 
   const getUsers = () => {
-    fetch("http://localhost:3000/users").then((res) => {
+    fetch(URL_BASE +  "/users").then((res) => {
       res
         .json()
         .then((res) => {
@@ -45,7 +46,7 @@ export const Users = () => {
   }, []);
 
   return (
-    <Fragment>
+    <>
       <div className="container">
         <button
           className="btn btn-primary mt-3"
@@ -56,6 +57,6 @@ export const Users = () => {
         <InputUser onSubmitForm={onSubmitForm} />
         <ListUsers users={users} />
       </div>
-    </Fragment>
+    </>
   );
 };

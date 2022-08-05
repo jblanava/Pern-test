@@ -1,7 +1,3 @@
-CREATE DATABASE pernprueba;
-
-\c pernprueba;
-
 CREATE TABLE usuario (usuario_id SERIAL PRIMARY KEY,name VARCHAR(255));
 
 CREATE TABLE connection

@@ -1,7 +1,8 @@
-import React, { Fragment, useEffect, useState } from "react";
-import InputConnection from "../components/Connections/InputConnection";
-import ListConnections from "../components/Connections/ListConnections";
+import { useEffect, useState } from "react";
+import InputConnection from "../../components/Connections/InputConnection";
+import ListConnections from "../../components/Connections/ListConnections";
 import { useParams } from "react-router-dom";
+import { URL_BASE } from "../../App";
 
 export interface ConnectionInterface {
   user1_id: number;
@@ -13,30 +14,27 @@ interface connection {
   user2_id: number;
 }
 
-export const Connections = () => {
+export const Connection = () => {
+
   const params = useParams();
-  let getConnectionTableString = "http://localhost:3000/connections-table";
-
+  let getConnectionTableString = URL_BASE + "/connections-table";
   const isGeneral: boolean = params.id === undefined;
-
   if (!isGeneral) getConnectionTableString += "/" + params.id;
-  console.log(getConnectionTableString);
 
   const [connections, setConnections] = useState<connection[]>([]);
 
   const onSubmitForm = (e: any, user1: string, user2: string) => {
     e.preventDefault();
-    fetch("http://localhost:3000/connections/" + user1 + "/" + user2, {
+    fetch(URL_BASE +  "/connections/" + user1 + "/" + user2, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
-          res.json();
+          return res.json();
         }
       })
       .then((resJson: any) => {
-        console.log(resJson[0].user1_id);
         const name1Promise = getUserNamePromise(resJson[0].user1_id);
         const name2Promise = getUserNamePromise(resJson[0].user2_id);
 
@@ -58,7 +56,7 @@ export const Connections = () => {
   const getConnectionsTable = () => {
     fetch(getConnectionTableString)
       .then((res) => {
-        res.json();
+       return res.json();
       })
       .then((resJson: any) => {
         if (isGeneral) {
@@ -77,7 +75,7 @@ export const Connections = () => {
   }, []);
 
   const getUserNamePromise = (id: number) => {
-    return fetch("http://localhost:3000/users/" + id)
+    return fetch(URL_BASE +  "/users/" + id)
       .then((res) => {
         const jsonData = res.json();
         return jsonData.then((resJsonData) => {
@@ -96,7 +94,7 @@ export const Connections = () => {
   );
 
   return (
-    <Fragment>
+    <>
       <div className="container">
         <button
           className="btn btn-primary mt-3"
@@ -107,6 +105,8 @@ export const Connections = () => {
         {InputConnectionHTML}
         <ListConnections list={connections} />
       </div>
-    </Fragment>
+    </>
   );
 };
+
+export default Connection
