@@ -13,7 +13,13 @@
     "prepare": "husky install",
     "test:client": "cd client && npm run test -- --watchAll=false && cd ..",
     "test:server": "cd server && npm test && cd ..",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test:staged": "jest --bail --findRelatedTests && npm run test:client"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "npm run test:staged"
+    ]
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",

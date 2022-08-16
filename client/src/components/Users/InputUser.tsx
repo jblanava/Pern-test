@@ -12,6 +12,7 @@ const InputUser = (props: UserInputProps) => {
       <h1 data-testid="inputUserTitle" className="text-center mt-5">
         User List
       </h1>
+      <h1>Probando husky pre-commit</h1>
       <form
         data-test
         className="d-flex mt-5"
