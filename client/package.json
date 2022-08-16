@@ -7,8 +7,13 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "i18next": "^21.8.16",
+    "i18next-browser-languagedetector": "^6.1.4",
+    "i18next-locize-backend": "^5.1.2",
+    "locize-cli": "^7.12.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^11.18.3",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
@@ -19,7 +24,8 @@
     "build": "react-scripts build",
     "deploy": "set PORT=3001 && npm run build && serve -s build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sync": "locize sync --api-key 68b4a710-6acb-4fc4-9f9a-396c47f3d102 --project-id b660bfc5-52a5-47a8-ace9-37cb21c65d91 --path ./public/locales"
   },
   "eslintConfig": {
     "extends": [

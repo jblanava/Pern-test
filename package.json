@@ -4,6 +4,7 @@
     "@types/node": "^18.0.6",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "i18next-http-backend": "^1.4.1",
     "node-pg-migrate": "^6.2.2",
     "pg": "^8.7.3",
     "react-router-dom": "^6.3.0",

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { URL_BASE } from "../../App";
 import InputUser from "../../components/Users/InputUser";
 import ListUsers from "../../components/Users/ListUsers";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../../components/commons/LanguageSwitcher";
 
 export const User = () => {
   const [users, setUsers] = useState<any[]>([]);
@@ -10,7 +12,7 @@ export const User = () => {
     e.preventDefault();
 
     const body = { name };
-    fetch(URL_BASE +  "/users", {
+    fetch(URL_BASE + "/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -29,7 +31,7 @@ export const User = () => {
   };
 
   const getUsers = () => {
-    fetch(URL_BASE +  "/users").then((res) => {
+    fetch(URL_BASE + "/users").then((res) => {
       res
         .json()
         .then((res) => {
@@ -44,6 +46,7 @@ export const User = () => {
   useEffect(() => {
     getUsers();
   }, []);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -52,8 +55,9 @@ export const User = () => {
           className="btn btn-primary mt-3"
           onClick={() => (window.location.href = "/connections")}
         >
-          Connections
+          {t("connectionLink")}
         </button>
+        <LanguageSwitcher></LanguageSwitcher>
         <InputUser onSubmitForm={onSubmitForm} />
         <ListUsers users={users} />
       </div>

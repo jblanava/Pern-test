@@ -3,6 +3,8 @@ import InputConnection from "../../components/Connections/InputConnection";
 import ListConnections from "../../components/Connections/ListConnections";
 import { useParams } from "react-router-dom";
 import { URL_BASE } from "../../App";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../../components/commons/LanguageSwitcher";
 
 export interface ConnectionInterface {
   user1_id: number;
@@ -15,7 +17,6 @@ interface connection {
 }
 
 export const Connection = () => {
-
   const params = useParams();
   let getConnectionTableString = URL_BASE + "/connections-table";
   const isGeneral: boolean = params.id === undefined;
@@ -25,7 +26,7 @@ export const Connection = () => {
 
   const onSubmitForm = (e: any, user1: string, user2: string) => {
     e.preventDefault();
-    fetch(URL_BASE +  "/connections/" + user1 + "/" + user2, {
+    fetch(URL_BASE + "/connections/" + user1 + "/" + user2, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     })
@@ -56,7 +57,7 @@ export const Connection = () => {
   const getConnectionsTable = () => {
     fetch(getConnectionTableString)
       .then((res) => {
-       return res.json();
+        return res.json();
       })
       .then((resJson: any) => {
         if (isGeneral) {
@@ -75,7 +76,7 @@ export const Connection = () => {
   }, []);
 
   const getUserNamePromise = (id: number) => {
-    return fetch(URL_BASE +  "/users/" + id)
+    return fetch(URL_BASE + "/users/" + id)
       .then((res) => {
         const jsonData = res.json();
         return jsonData.then((resJsonData) => {
@@ -86,11 +87,13 @@ export const Connection = () => {
         console.error("Get username promise rejected : " + reason)
       );
   };
-
+  const { t } = useTranslation();
   const InputConnectionHTML = isGeneral ? (
     <InputConnection onSubmitForm={onSubmitForm} />
   ) : (
-    <h1 className="text-center mt-5">User with ID {params.id} connections</h1>
+    <h1 className="text-center mt-5">
+      {t("EspecificConnectionsTitle", { id: params.id })}
+    </h1>
   );
 
   return (
@@ -100,8 +103,10 @@ export const Connection = () => {
           className="btn btn-primary mt-3"
           onClick={() => (window.location.href = "/")}
         >
-          Users
+          {t("userLink")}
         </button>
+        <LanguageSwitcher></LanguageSwitcher>
+
         {InputConnectionHTML}
         <ListConnections list={connections} />
       </div>
@@ -109,4 +114,4 @@ export const Connection = () => {
   );
 };
 
-export default Connection
+export default Connection;

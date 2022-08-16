@@ -1,19 +1,21 @@
-interface ListProps{
+import { useTranslation } from "react-i18next";
+
+interface ListProps {
   list: any[];
 }
 
-export const ListConnections = (props:ListProps) => {
-
+export const ListConnections = (props: ListProps) => {
+  const { t } = useTranslation();
   return (
     <>
       {" "}
       <table className="table mt-5 text-center">
         <thead>
           <tr>
-            <th>User 1 ID</th>
-            <th>User 1 Name</th>
-            <th>User 2 Name </th>
-            <th>User 2 ID </th>
+            <th>{t("user.id", { number: 1 })}</th>
+            <th>{t("user.name", { number: 1 })}</th>
+            <th>{t("user.name", { number: 2 })}</th>
+            <th>{t("user.id", { number: 2 })}</th>
           </tr>
         </thead>
         <tbody>
