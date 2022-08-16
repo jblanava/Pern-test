@@ -15,6 +15,7 @@ interface connection {
 }
 
 export const Connection = () => {
+
   const params = useParams();
   let getConnectionTableString = URL_BASE + "/connections-table";
   const isGeneral: boolean = params.id === undefined;
@@ -24,7 +25,9 @@ export const Connection = () => {
 
   const onSubmitForm = (e: any, user1: string, user2: string) => {
     e.preventDefault();
+
     fetch(URL_BASE + "/connections/" + user1 + "/" + user2, {
+
       method: "POST",
       headers: { "Content-Type": "application/json" },
     })
@@ -55,7 +58,9 @@ export const Connection = () => {
   const getConnectionsTable = () => {
     fetch(getConnectionTableString)
       .then((res) => {
+
         return res.json();
+
       })
       .then((resJson: any) => {
         if (isGeneral) {
@@ -74,7 +79,9 @@ export const Connection = () => {
   }, []);
 
   const getUserNamePromise = (id: number) => {
+
     return fetch(URL_BASE + "/users/" + id)
+
       .then((res) => {
         const jsonData = res.json();
         return jsonData.then((resJsonData) => {
@@ -109,3 +116,4 @@ export const Connection = () => {
 };
 
 export default Connection;
+

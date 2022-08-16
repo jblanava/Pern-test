@@ -10,6 +10,7 @@ export const User = () => {
     e.preventDefault();
 
     const body = { name };
+
     fetch(URL_BASE + "/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -30,6 +31,7 @@ export const User = () => {
 
   const getUsers = () => {
     fetch(URL_BASE + "/users").then((res) => {
+
       res
         .json()
         .then((res) => {

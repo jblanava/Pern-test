@@ -5,8 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "serve": "npm run migrate up && nodemon index.ts ",
-    "migrate": "node-pg-migrate",
-    "try": "echo %EnvVar%"
+    "migrate": "node-pg-migrate"
   },
   "repository": {
     "type": "git",
