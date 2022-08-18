@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML</title>
+    <style>
+        html {
+            zoom: 1.3;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial';
+            height: 100vh;
+        }
+
+        div.page {
+            background: #ffffff;
+            position: relative;
+            width: 8.5in;
+            height: 10.9in;
+            margin: 0.1cm auto;
+            border: 1px solid #f5b827;
+            /*
+            background: url("images/bg.png");
+            background-size: cover;*/
+
+        }
+
+        @media print {
+            div.page {
+                margin: 0;
+                page-break-after: always;
+                border: none;
+            }
+        }
+
+        .pagecontent {
+            margin: 0.7cm 1.5cm;
+        }
+
+        .divFooter {
+            position: absolute;
+            bottom: 1cm;
+            left: 1.25cm;
+            text-align: center;
+            width: 19cm;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0;
+            margin: 0;
+            border-collapse: collapse;
+        }
+
+        .tblBorder,
+        .tblBorder td {
+            border: 1px solid #69696b;
+            height: 19px;
+            padding-left: 4px;
+        }
+
+        .tblBorder tr:first-child td {
+            background: #f4f5f6;
+            padding: 3px;
+            font-weight: bold;
+            border: none;
+            height: 19px;
+        }
+
+        .tblCategory td {
+            height: 29px;
+            border-bottom: 1px dotted black;
+        }
+
+        .tblCategory2 {
+            border: 1px solid black;
+        }
+
+        .tblCategory2 td {
+            height: 19px;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .txt30 {
+            font-size: 30pt;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .txt20 {
+            font-size: 20pt;
+            font-weight: bold;
+        }
+
+        .txt18 {
+            font-size: 18pt;
+            font-weight: bold;
+        }
+
+        .txt14 {
+            font-size: 14pt;
+        }
+
+        .txt12 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-left: 26px;
+            margin-top: -21px;
+            background: white;
+            width: fit-content;
+            padding: 0px 10px;
+
+        }
+
+        .txt10 {
+            font-size: 10pt;
+        }
+
+        .txt9 {
+            font-size: 9pt;
+        }
+
+        .txt8 {
+            font-size: 8pt;
+            text-align: center;
+            font-weight: bold;
+            color: #5fb692;
+            padding: 2px;
+        }
+
+        .txt8_5 {
+            font-size: 8.5pt;
+        }
+
+        .txt7 {
+            font-size: 7pt;
+        }
+
+        .txt6 {
+            font-size: 6pt;
+        }
+
+        .txt6g {
+            font-size: 6pt;
+            text-align: center;
+            font-weight: bold;
+            color: #6d6d6d;
+            background: #f4f4f4;
+            padding: 2px;
+            border-bottom: 2px solid #a3a3a3;
+        }
+
+        .txt5_5 {
+            padding-top: 6px;
+            font-size: 5.6pt;
+        }
+
+        .txt5 {
+            font-size: 5pt;
+        }
+
+        .txtCenter {
+            text-align: center;
+        }
+
+        .txtRight {
+            text-align: right;
+        }
+
+        .txtBold {
+            font-weight: bold;
+        }
+
+        .txtGray {
+            color: #696a6c;
+        }
+
+        .txtBlue {
+            color: #5e90cb;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .bgGray {
+            background: #f4f5f6;
+            padding: 6px 8px;
+        }
+
+        .progress-outline {
+            width: 100%;
+            border: 2px solid #a4a4a4;
+            border-radius: 3px;
+            padding: 1px;
+        }
+
+        .progress-bar-green {
+            width: 100%;
+            background: #5fb692;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .progress-bar{
+            width: 100%;
+            background: #5fb692;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .progress-bar-yellow {
+            width: 100%;
+            background: #fbcb42;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .progress-bar-red {
+            width: 100%;
+            background: #d85031;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .outcome-row-td {
+            padding: 4px 6px;
+        }
+
+        .outcome-row-table tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+
+        .outcome-green {
+            color: #5fb692;
+        }
+
+        .outcome-yellow {
+            color: #fbcb42;
+        }
+
+        .outcome-red {
+            color: #d85031;
+        }
+
+        .sec_table td {
+            padding: 4px 6px;
+        }
+
+        .sec_table tr:nth-child(even) {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="pagecontent">
+            <table>
+                <tr>
+                    <td width="33%" valign="top"
+                    style="padding-top: 10px; padding-bottom: 10px; padding-left: 40px;  padding-right: 40px;">
+                        <img src=<%= logo %> alt="Logo">
+                    </td>
+                    <td width="33%" valign="top"
+                        style="padding-top: 20px; padding-left: 10px;  padding-right: 10px; border-left: 2px solid #eaeaea;">
+                        <table>
+                            <tr>
+                                <td width="40%" valign="top">
+                                    <p class="txt6"> <%=t('nameLabel')%></p>
+                                </td>
+                                <td width="60%" valign="top">
+                                    <p class="txt6">
+                                        <b><%= firstname %> <%= surname %></b>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="40%" valign="top">
+                                    <p class="txt6"><%=t('roleLabel')%></p>
+                                </td>
+                                <td width="60%" valign="top">
+                                    <p class="txt6">
+                                        <%= role %>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" style="padding-top: 3px;">
+                                    <p class="txt6"> <%=t('applyingLabel')%></p>
+                                </td>
+                                <td valign="top" style="padding-top: 3px;">
+                                    <p class="txt6"><%= address %>, <%= postcode %>, <%= city %></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="34%" valign="top"
+                        style="padding-top: 20px; padding-left: 10px;  padding-right: 10px; border-left: 2px solid #eaeaea;">
+                        <table>
+                            <tr>
+                                <td width="40%" valign="top">
+                                    <p class="txt6"><%=t('checkDateLabel')%> </p>
+                                </td>
+                                <td width="60%" valign="top">
+                                    <p class="txt6">
+                                        <b><%= check_completed_time %></b>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" style="padding-top: 3px;">
+                                    <p class="txt6"><%=t('checkIdLabel')%></p>
+                                </td>
+                                <td valign="top" style="padding-top: 3px;">
+                                    <p class="txt6"><%= id %></p>
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td valign="top" style="padding-top: 3px;">
+                                    <p class="txt6">Agent:</p>
+                                </td>
+                                <td valign="top" style="padding-top: 3px;">
+                                    <p class="txt6">{Landlord Name}</p>
+                                </td>
+                            </tr> -->
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <hr style="border: 2px solid #eaeaea; margin-top: 6px;">
+
+            <hr style="border: 2px solid #a6a6a6; margin-top: 18px;">
+
+            <p class="txt12"><%=t('credibleeScore')%></p>
+
+            <table>
+                <tr>
+                    <td width="24%" valign="top">
+                        <p class="txt30"><%- overall_check_score -%></p>
+                    </td>
+                    <td width="76%" valign="top" style="padding: 12px;">
+                        <p class="txt5"><%=t('credibleeScoreDescription')%> </p>
+                    </td>
+                </tr>
+            </table>
+
+            <hr style="border: 2px solid #a6a6a6; margin-top: 14px;">
+
+            <p class="txt12"><%=t('primaryAnalysisLabel')%></p>
+
+            <table>
+                <tr>
+                    <td width="1%" valign="top"></td>
+                    <td width="22%" valign="top" style="padding-top: 16px;">
+                        <p class="txt6g"><%=t('identityVerificationLabel')%></p>
+
+                        <p class="txt8"><%=t('verifiedTag')%></p>
+
+                        <p class="txt6g" style="margin-top: 7px;"><%=t('employmentVerificationLabel')%></p>
+
+                        <p class="txt8"><%=t('verifiedTag')%></p>
+                        <p class="txt7" style="text-align: center; padding: 2px;"><b><%=t('employerNameLabel')%></b></p>
+                        <p class="txt7" style="text-align: center; padding: 2px;"><%= employerName %></p>
+                        <p class="txt7" style="text-align: center; padding: 2px;"><b><%=t('employerDetailsLabel')%></b></p>
+                        <p class="txt7" style="text-align: center; padding: 2px;"><%= employerURL %></p>
+
+                        <p class="txt6g" style="margin-top: 7px;"><%=t('incomeVerificationTag')%></p>
+
+                        <p class="txt8"><%=t('verifiedTag')%></p>
+                    </td>
+                    <td width="1%" valign="top"></td>
+                    <% if (preCheck==false) { %> 
+                    <td width="76%" valign="top" style="padding: 12px;">
+                        <p class="txt9"><%=t('tenancyOutcomesTitle')%></p>
+                        <hr style="border: 1px solid #a6a6a6; margin: 0;">
+
+                        <table class="outcome-row-table">
+                            <tr>
+                                <td width="100%" class="outcome-row-td">
+                                    <table>
+                                        <tr>
+                                            <td width="25%">
+                                                <p class="txt7"><b><%=t('rentAffordabilityTitle')%></b></p>
+                                            </td>
+                                            <td width="25%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold">
+                                                    <span class="outcome-<%= rent_affordability >= 66 ? "green" : rent_affordability >= 33 ? "yellow" : "red" %>"><%= rent_affordability >= 66 ? t('belowAverageRisk') : rent_affordability >= 33 ? t('standardRisk') : t('aboveAverageRisk') %></span>
+                                                </p>
+                                            </td>
+                                            <td width="38%">
+                                                <div class="progress-outline">
+                                                    <div class="progress-bar-<%= rent_affordability >= 66 ? "green" : rent_affordability >= 33 ? "yellow" : "red" %>" style="width: <%- rent_affordability %>%"></div>
+                                                </div>
+                                            </td>
+                                            <td width="12%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                    <span class="outcome-<%= rent_affordability >= 66 ? "green" : rent_affordability >= 33 ? "yellow" : "red" %>"><%- rent_affordability %></span>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <p class="txt5_5"><%=t('rentAffordabilityDescription')%> </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="outcome-row-td">
+                                    <table>
+                                        <tr>
+                                            <td width="25%">
+                                                <p class="txt7"><b><%=t('consumerBehaviourTitle')%></b></p>
+                                            </td>
+                                            <td width="25%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                    <span class="outcome-<%= consumer_behaviour >= 66 ? "green" : consumer_behaviour >= 33 ? "yellow" : "red" %>"><%= consumer_behaviour >= 66 ? t('belowAverageRisk') : consumer_behaviour >= 33 ? t('standardRisk') : t('aboveAverageRisk') %></span>
+                                                </p>
+                                            </td>
+                                            <td width="38%">
+                                                <div class="progress-outline">
+                                                    <div class="progress-bar-<%= consumer_behaviour >= 66 ? "green" : consumer_behaviour >= 33 ? "yellow" : "red" %>" style="width: <%- consumer_behaviour %>%"></div>
+                                                </div>
+                                            </td>
+                                            <td width="12%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                    <span class="outcome-<%= consumer_behaviour >= 66 ? "green" : consumer_behaviour >= 33 ? "yellow" : "red" %>"><%- consumer_behaviour %></span> / 100
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <p class="txt5_5"><%=t('consumerBehaviourDescription')%></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="outcome-row-td">
+                                    <table>
+                                        <tr>
+                                            <td width="25%">
+                                                <p class="txt7"><b>
+                                                    <%=t('cashflowTitle')%></b></p>
+                                            </td>
+                                                <td width="25%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                    <span class="outcome-<%= cashflow >= 66 ? "green" : cashflow >= 33 ? "yellow" : "red" %>"><%= cashflow >= 66 ? t('belowAverageRisk') : cashflow >= 33 ? t('standardRisk') : t('aboveAverageRisk') %></span>
+                                                </p>
+                                            </td>
+                                            <td width="38%">
+                                                <div class="progress-outline">
+                                                    <div class="progress-bar-<%= cashflow >= 66 ? "green" : cashflow >= 33 ? "yellow" : "red" %>" style="width: <%- cashflow %>%"></div>
+                                                </div>
+                                            </td>
+                                            <td width="12%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                    <span class="outcome-<%= cashflow >= 66 ? "green" : cashflow >= 33 ? "yellow" : "red" %>"><%- cashflow %></span> / 100
+                                                </p>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                    <p class="txt5_5"> <%=t('cashflowDescription')%></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="outcome-row-td">
+                                    <table>
+                                        <tr>
+                                            <td width="25%">
+                                                <p class="txt7"><b>
+                                                    <%=t('employmentStabilityTitle')%></b></p>
+                                            </td>
+    <td width="25%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                    <span class="outcome-<%= employment_stability >= 6 ? "green" : employment_stability >= 3 ? "yellow" : "red" %>"><%= employment_stability >= 6 ? t('belowAverageRisk') : employment_stability >= 3 ? t('standardRisk') : t('aboveAverageRisk') %></span>
+                                                </p>
+                                            </td>
+                                            <td width="38%">
+                                                <!-- <div class="progress-outline">
+                                                    <div class="progress-bar-<%= employment_stability >= 12 ? "green" : employment_stability >= 6 ? "yellow" : "red" %>" style="width: <%- employment_stability %>%"></div>
+                                                </div> -->
+                                            </td>
+                                            <td width="12%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                    <span class="outcome-<%= employment_stability >= 6 ? "green" : employment_stability >= 3 ? "yellow" : "red" %>"><%- employment_stability %>+ months</span>
+                                                </p>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                    <p class="txt5_5"><%=t('employmentStabilityDescription')%>
+                                     </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="outcome-row-td">
+                                    <table>
+                                        <tr>
+                                            <td width="25%">
+                                                <p class="txt7"><b>
+                                                    <%=t('rentIncomeTitle')%> </b></p>
+                                            </td>
+    <td width="25%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                    <span class="outcome-<%= rent_income_ratio <= 0.2 ? "green" : rent_income_ratio <= 0.4 ? "yellow" : "red" %>"><%= rent_income_ratio >= 66 ? t('belowAverageRisk') : rent_income_ratio >= 33 ? t('standardRisk') : t('aboveAverageRisk') %></span>
+                                                </p>
+                                            </td>
+                                            <td width="38%">
+                                                <!-- <div class="progress-outline">
+                                                    <div class="progress-bar-<%= rent_income_ratio >= 66 ? "green" : rent_income_ratio >= 33 ? "yellow" : "red" %>" style="width: <%- rent_income_ratio %>%"></div>
+                                                </div> -->
+                                            </td>
+                                            <td width="12%">
+                                                <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                    <span class="outcome-<%= rent_income_ratio <= 0.2 ? "green" : rent_income_ratio <= 0.4 ? "yellow" : "red" %>"><%- rent_income_ratio %></span>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <p class="txt5_5"><%=t('rentIncomeDescription')%> </p>
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                            <td class="outcome-row-td">
+                                <table>
+                                    <tr>
+                                        <td width="25%">
+                                            <p class="txt7"><b>
+                                                LENGTH OF TENANCY:</b></p>
+                                        </td>
+                                        <td width="25%">
+                                            <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                <span class="outcome-red"> SHORT TERM   </span>
+                                            </p>
+                                        </td>
+                                        <td width="38%">
+                                            <div class="progress-outline">
+                                                <div class="progress-bar-red" style="width: 80%"></div>
+                                            </div>
+                                        </td>
+                                        <td width="12%">
+                                            <p class="txt7" style="text-align: center; font-weight: bold;">
+                                                <span class="outcome-red">1</span> / 100</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <p class="txt5_5">The Length of Tenancy indicates how often a tenant is expected to
+                                    move. It is determined by the rental market, the applicant's unique characteristics,
+                                    and the type of rental property, as well as prediction of how these conditions may
+                                    change in the future. </p>
+                            </td>
+                        </tr> -->
+                        </table>
+                    </td>
+                    <% } %> 
+                </tr>
+            </table>
+
+                        <hr style="border: 2px solid #a6a6a6;">
+            <!-- <table style="margin-top: 4px;">
+                <tr>
+                    <td width="48%" valign="top">
+                        <hr style="border: 2px solid #a6a6a6;"> -->
+                        <!-- <p class="txt12">SECONDARY ANALYSIS</p> -->
+
+                        <!-- <table class="sec_table" style="margin-top: 10px;">
+                        <tr>
+                            <td width="100%">
+                                <p class="txt7">
+                                    INCOME & EMPLOYMENT STABILITY <span class="outcome-red" style="float: right">BELOW AVERAGE STABILITY</span>
+                                </p>
+
+                                <p class="txt5_5" style="margin-top: 0px;">Income and Employment Stability indicates the
+                                    risk an applicant's employment or income may effect their tenancy. It is determined
+                                    by analyzing the applicant's financial and employment history and the economic
+                                    activity in the marketplace. </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%">
+                                <p class="txt7">
+                                    PET LIABILITY ANALYSIS <span class="outcome-green" style="float: right">BELOW AVERAGE RISK</span>
+                                </p>
+
+                                <p class="txt5_5" style="margin-top: 0px;">Pet Liability indicates the risk an
+                                    applicant's pet may effect their tenancy, the condition of the rental property, or
+                                    if any other liability exists for the landlord. It is determined by analyzing the
+                                    type of pet and property characteristics. </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%">
+                                <p class="txt7">
+                                    PROPERTY SUITABILITY <span class="outcome-green" style="float: right">v</span>
+                                </p>
+
+                                <p class="txt5_5" style="margin-top: 0px;">Property Suitability indicates if the
+                                    property meets the needs of the applicant in terms of livability 1 % LOW RISK
+                                    CLEARED and financially. It is determined by analyzing the applicant's needs,
+                                    expectations, and rental history then comparing to the property conditions. </p>
+                            </td>
+                        </tr>
+                    </table> -->
+
+
+                        <!-- <hr style="border: 2px solid #a6a6a6; margin-top: 20px;"> -->
+                        <!-- <p class="txt12">KEY RISKS</p>
+
+                        <p class="txt6" style="margin-top: 10px;">• Applicant has a high rent-to-income ratio</p> -->
+
+                    <!-- </td>
+                    <td width="3%" valign="top"></td> -->
+                    <!-- <td width="49%" valign="top">
+                    <hr style="border: 2px solid #a6a6a6;">
+                    <p class="txt12">FINANCIAL ANALYSIS</p>
+
+
+                    <table style="margin-top: 15px;">
+                        <tr>
+                            <td width="48%" valign="top">
+
+                                <p class="txt6g">RENT TO INCOME RATIO</p>
+
+                                <table style="margin-top: 6px;">
+                                    <tr>
+                                        <td width="50%" style="text-align: center;">
+                                            <p class="txt18 outcome-red">49%</p>
+                                        </td>
+                                        <td width="50%" style="text-align: center;">
+                                            <p class="txt8_5 outcome-red">High Risk</p>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <p class="txt5" style="margin-top: 5px;">Rent to Income Ratio risk is based on the
+                                    applicant rent to VERIFIED income ratio compared to other successful tenants in
+                                    similar rental markets living in similar property classifications.</p>
+
+                                <p class="txt6g" style="margin-top: 13px;">
+                                    DEBT TO INCOME RATIO</p>
+
+                                <table style="margin-top: 6px;">
+                                    <tr>
+                                        <td width="50%" style="text-align: center;">
+                                            <p class="txt18 outcome-green">1%</p>
+                                        </td>
+                                        <td width="50%" style="text-align: center;">
+                                            <p class="txt8_5 outcome-green">Low Risk</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <p class="txt5" style="margin-top: 5px;">Debt to Income Ratio risk is based on the
+                                    applicant debt to VERIFIED income ratio compared to other successful tenants in
+                                    similar rental markets living in similar property classifications.</p>
+
+                                <p class="txt6g" style="margin-top: 13px;">
+                                    CASH FLOW ANALYSIS</p>
+
+                                <p class="txt8" style="margin-top: 2px;">LOW RISK</p>
+
+                                <p class="txt5" style="margin-top: 5px;">Cash Flow risk is based on an internal
+                                    reconstruction of the applicant's finances compared to other successful tenants in
+                                    similar rental markets with similar personal characteristics.</p>
+
+
+                                <p class="txt6g" style="margin-top: 13px;">
+                                    CONSUMER BEHAVIOUR ANALYSIS</p>
+
+                                <p class="txt8" style="margin-top: 2px;">LOW RISK</p>
+
+                                <p class="txt5" style="margin-top: 5px;">Consumer Behaviour Analysis is based on the
+                                    applicant's financials, credit data, and social data compared with successful
+                                    tenants in similar rental markets with similar income levels. This assessment is
+                                    designed to help landlords understand how a tenant makes financial decisions. </p>
+
+                            </td>
+                            <td width="4%" valign="top"></td>
+                            <td width="48%" valign="top">
+                                <p class="txt6g"> CREDIT CHECK</p>
+
+                                <table style="margin-top: 6px;">
+                                    <tr>
+                                        <td width="50%" style="text-align: center;">
+                                            <p class="txt18 outcome-red">C</p>
+                                        </td>
+                                        <td width="50%" style="text-align: center;">
+                                            <p class="txt18 outcome-red">588</p>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <p class="txt5" style="margin-top: 5px;">The Credit Risk Score is based solely on the
+                                    applicant's static financial data and is used to determine finance-ability for
+                                    montages, car loans, and credit. It does not account for age, location, or other
+                                    factors that may determine tenant quality. </p>
+
+                                <p class="txt6g" style="margin-top: 13px;">
+                                    BANKRUPTCY SEARCH </p>
+
+                                <p class="txt8" style="margin-top: 4px;">CLEARED</p>
+
+
+                                <p class="txt6g" style="margin-top: 8px;">
+                                    COLLECTIONS </p>
+
+                                <p class="txt8" style="margin-top: 4px;">CLEARED</p>
+
+                                <p class="txt6g" style="margin-top: 8px;">
+                                    LIENS / JUDGEMENTS </p>
+
+                                <p class="txt8" style="margin-top: 4px;">CLEARED</p>
+
+                                <p class="txt6g" style="margin-top: 8px;">
+                                    HIGH RISK OF FRAUD </p>
+
+                                <p class="txt8" style="margin-top: 4px;">NO RISK FOUND</p>
+
+                                <p class="txt6g" style="margin-top: 8px;">
+                                    TOTAL CONSUMER DEBT </p>
+
+                                <p class="txt8" style="margin-top: 4px; color: #8b8b8b;">$722</p>
+
+                                <p class="txt6g" style="margin-top: 8px;">
+                                    TOTAL DEBT </p>
+
+                                <p class="txt8" style="margin-top: 4px; color: #8b8b8b;">$722</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td> -->
+                <!-- </tr>
+            </table> -->
+
+            <table style="margin-top: 15px;">
+                <tr>
+                    <td width="66%">
+                        <p class="txt5"><%=t('termsOfService')%> </p>
+                    </td>
+                    <td width="2%"></td>
+                    <td width="32%" style="background: #f4f4f4; padding: 3px;">
+                        <p class="txt8" style="color: #7d7d7d; text-align: left;"><%=t('questionsAboutReport')%> </p>
+
+                        <p class="txt8" style="color: #7d7d7d;">
+                            <!-- +44 (x) xxxx xxx xxx  -->
+                            <span
+                                style="padding-left: 10px;">hello@Crediblee.com</span></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
