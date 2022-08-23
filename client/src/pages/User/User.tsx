@@ -3,9 +3,12 @@ import { URL_BASE } from "../../App";
 import InputUser from "../../components/Users/InputUser";
 import ListUsers from "../../components/Users/ListUsers";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "../../components/commons/LanguageSwitcher";
+import { LanguageProvider } from "@prototyp/react-language-switcher/dist/components/LanguageProvider";
+import { LanguageSwitcher } from "@prototyp/react-language-switcher/dist/middleware/language/LanguageSwitcher";
+import { LngDropDown } from "../../components/commons/dropDownLanguage";
+//import LanguageSwitcher from "../../components/commons/LanguageSwitcher";
 
-export const User = () => {
+export const User = (props: any) => {
   const [users, setUsers] = useState<any[]>([]);
 
   const onSubmitForm = (e: any, name: string) => {
@@ -57,7 +60,9 @@ export const User = () => {
         >
           {t("connectionLink")}
         </button>
-        <LanguageSwitcher></LanguageSwitcher>
+
+        <LngDropDown lngs={props.lngs}></LngDropDown>
+
         <InputUser onSubmitForm={onSubmitForm} />
         <ListUsers users={users} />
       </div>

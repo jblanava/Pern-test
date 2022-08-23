@@ -4,7 +4,7 @@ import ListConnections from "../../components/Connections/ListConnections";
 import { useParams } from "react-router-dom";
 import { URL_BASE } from "../../App";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "../../components/commons/LanguageSwitcher";
+import LngDropDown from "../../components/commons/dropDownLanguage";
 
 export interface ConnectionInterface {
   user1_id: number;
@@ -16,7 +16,7 @@ interface connection {
   user2_id: number;
 }
 
-export const Connection = () => {
+export const Connection = (props: any) => {
   const params = useParams();
   let getConnectionTableString = URL_BASE + "/connections-table";
   const isGeneral: boolean = params.id === undefined;
@@ -105,7 +105,8 @@ export const Connection = () => {
         >
           {t("userLink")}
         </button>
-        <LanguageSwitcher></LanguageSwitcher>
+
+        <LngDropDown lngs={props.lngs}></LngDropDown>
 
         {InputConnectionHTML}
         <ListConnections list={connections} />

@@ -5,6 +5,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Connection } from "./pages/Connection/Connection";
 import { User } from "./pages/User/User";
 
+const lngList = [
+  { id: "gb", nativeName: "English" },
+  { id: "es", nativeName: "Español" },
+  { id: "fr", nativeName: "François" },
+  { id: "de", nativeName: "Deutsch" },
+];
+
 export const URL_BASE: string =
   "http://" +
   process.env.REACT_APP_SERVER_HOST +
@@ -15,9 +22,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<User />} />
-        <Route path="/connections" element={<Connection />} />
-        <Route path="/connections/:id" element={<Connection />} />
+        <Route path="/" element={<User lngs={lngList} />} />
+        <Route path="/connections" element={<Connection lngs={lngList} />} />
+        <Route
+          path="/connections/:id"
+          element={<Connection lngs={lngList} />}
+        />
       </Routes>
     </Router>
   );
