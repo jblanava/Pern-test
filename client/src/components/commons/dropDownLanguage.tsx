@@ -11,12 +11,14 @@ interface lng {
 export function LngDropDown(props: any) {
   const lngs: lng[] = props.lngs;
 
-  var userLanguage = window.navigator.language;
+  const { i18n } = useTranslation();
 
+  const currentlng: string = i18n.resolvedLanguage.substring(0, 2);
+
+  var userLanguage = currentlng || window.navigator.language;
   if (userLanguage === "en") userLanguage = "gb";
 
   const [selectedLng, setSelectedLng] = useState(userLanguage);
-  const { i18n } = useTranslation();
 
   return (
     <Dropdown className="mt-3" style={{ float: "right" }}>
