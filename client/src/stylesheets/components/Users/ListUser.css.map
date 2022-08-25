@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"ListUser.css"}
+{"version":3,"sourceRoot":"","sources":["../../../sass/components/Users/ListUser.scss"],"names":[],"mappings":"AAAA;EACI;EACA","file":"ListUser.css"}

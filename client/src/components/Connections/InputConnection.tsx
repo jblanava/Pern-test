@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import "../../stylesheets/components/Connections/InputConnection.css";
 
 interface ConnectionInput {
   onSubmitForm: (e: any, user1: string, user2: string) => void;
@@ -12,9 +13,9 @@ const InputConnection = (props: ConnectionInput) => {
 
   return (
     <>
-      <h1 className="text-center mt-5">{t("connectionTitle")}</h1>
+      <h1 className="title">{t("connectionTitle")}</h1>
       <form
-        className="d-flex mt-5"
+        className="d-flex form"
         onSubmit={(e) => props.onSubmitForm(e, user1, user2)}
       >
         <input

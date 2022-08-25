@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import "../../stylesheets/components/Connections/ListConnection.css";
 
 interface ListProps {
   list: any[];

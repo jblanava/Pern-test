@@ -2,6 +2,7 @@ import { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { useTranslation } from "react-i18next";
+import "../../stylesheets/components/commons/dropDownLanguage.css";
 
 interface lng {
   id: string;
@@ -21,7 +22,7 @@ export function LngDropDown(props: any) {
   const [selectedLng, setSelectedLng] = useState(userLanguage);
 
   return (
-    <Dropdown className="mt-3" style={{ float: "right" }}>
+    <Dropdown className="dropdown">
       <Dropdown.Toggle variant="blank" id="dropdown-basic">
         <span className={`fi fi-${selectedLng}`}></span>
       </Dropdown.Toggle>
@@ -39,7 +40,7 @@ export function LngDropDown(props: any) {
               }}
             >
               <span className={`fi fi-${value.id}`}></span>
-              <span className="ml-2">{value.nativeName}</span>
+              <span className="nativeName">{value.nativeName}</span>
               <br />
             </Dropdown.Item>
           </>

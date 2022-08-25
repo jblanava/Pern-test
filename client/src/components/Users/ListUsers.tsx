@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import "../../stylesheets/components/Users/ListUser.css";
 interface ListUsersProp {
   users: any[];
 }
@@ -8,7 +9,7 @@ const ListUsers = (props: ListUsersProp) => {
   return (
     <>
       {" "}
-      <table className="table mt-5 text-center">
+      <table className="table tableClass">
         <thead>
           <tr>
             <th>{t("id")}</th>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import "../../stylesheets/components/Users/InputUser.css";
 
 interface UserInputProps {
   onSubmitForm: (e: any, name: string) => void;
@@ -11,9 +12,9 @@ const InputUser = (props: UserInputProps) => {
 
   return (
     <>
-      <h1 className="text-center mt-5">{t("userInputTitle")}</h1>
+      <h1 className="title">{t("userInputTitle")}</h1>
       <form
-        className="d-flex mt-5"
+        className="d-flex form"
         onSubmit={(e) => props.onSubmitForm(e, name)}
       >
         <input
