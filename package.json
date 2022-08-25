@@ -9,8 +9,26 @@
     "react-router-dom": "^6.3.0",
     "ts-node": "^10.9.1"
   },
+  "scripts": {
+    "prepare": "husky install",
+    "test:client": "cd client && npm run test -- --watchAll=false && cd ..",
+    "test:server": "cd server && npm test && cd ..",
+    "format": "prettier --write .",
+    "test:staged": "jest --bail --findRelatedTests && npm run test:client"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "npm run test:staged"
+    ]
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
+    "@typescript-eslint/parser": "^5.32.0",
+    "eslint": "^8.21.0",
+    "eslint-plugin-react": "^7.30.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "typescript": "^4.7.4"
   }
 }

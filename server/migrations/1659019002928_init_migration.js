@@ -2,10 +2,8 @@
 
 exports.shorthands = undefined;
 
-exports.up = pgm => { 
-    
-    pgm.sql(
-
+exports.up = (pgm) => {
+  pgm.sql(
     `CREATE TABLE usuario (usuario_id SERIAL PRIMARY KEY,name VARCHAR(255));
     
     CREATE TABLE connection
@@ -19,16 +17,14 @@ exports.up = pgm => {
         ),
         FOREIGN KEY (user1_id) REFERENCES usuario (usuario_id),
         FOREIGN KEY (user2_id) REFERENCES usuario (usuario_id)
-    );`)
-
-
+    );`
+  );
 };
 
-exports.down = pgm => {
-    pgm.sql(
+exports.down = (pgm) => {
+  pgm.sql(
     `DROP TABLE connection CASCADE;
     DROP TABLE usuario CASCADE;
-    `)};
-
-
-
+    `
+  );
+};
