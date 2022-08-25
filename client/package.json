@@ -24,10 +24,12 @@
   "scripts": {
     "start": "set PORT=3001 && react-scripts start",
     "build": "react-scripts build",
-    "deploy": "set PORT=3001 && npm run build && serve -s build",
+    "deploy": "set PORT=3001 && npm run build && npm run sass:dev && serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sync": "locize sync --api-key 68b4a710-6acb-4fc4-9f9a-396c47f3d102 --project-id b660bfc5-52a5-47a8-ace9-37cb21c65d91 --path ./public/locales"
+    "sync": "locize sync --api-key 68b4a710-6acb-4fc4-9f9a-396c47f3d102 --project-id b660bfc5-52a5-47a8-ace9-37cb21c65d91 --path ./public/locales",
+    "sass:build": "sass --watch src/sass:public/stylesheets",
+    "sass:dev": "sass --watch src/sass:src/stylesheets"
   },
   "eslintConfig": {
     "extends": [
